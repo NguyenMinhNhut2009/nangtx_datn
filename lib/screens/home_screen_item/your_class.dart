@@ -58,11 +58,16 @@ class YourClass extends StatelessWidget {
           },
         ),
       ),
-      body: ListView.builder(
-        itemCount: classes.length,
-        itemBuilder: (context, index) {
-          return ClassListItem(classInfo: classes[index]);
-        },
+      body: Container(
+        child: ListView.builder(
+          itemCount: classes.length,
+          itemBuilder: (context, index) {
+            return ClassListItem(
+              classInfo: classes[index],
+              checkPage: true,
+            );
+          },
+        ),
       ),
     );
   }

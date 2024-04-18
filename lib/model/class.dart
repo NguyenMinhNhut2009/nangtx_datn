@@ -5,7 +5,7 @@ class Class {
   final int sessions;
   final String schedule;
   final String imageUrl;
-  final bool? attendenceStatus;
+  final int? attendenceStatus;
   final int? numberOfLessonsStudied;
   final String? document;
 

@@ -5,8 +5,9 @@ import '../model/class.dart';
 
 class ClassListItem extends StatelessWidget {
   final Class classInfo;
+  final bool checkPage;
 
-  ClassListItem({required this.classInfo});
+  ClassListItem({required this.classInfo, required this.checkPage});
 
   @override
   Widget build(BuildContext context) {
@@ -111,6 +112,7 @@ class ClassListItem extends StatelessWidget {
                     MaterialPageRoute(
                         builder: (context) => ClassDetailPage(
                               classId: classInfo.id,
+                              checkPage: checkPage,
                             )));
               },
               child: Ink(

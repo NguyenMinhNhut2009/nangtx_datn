@@ -1,11 +1,13 @@
 import 'package:datn_test/model/class.dart';
+import 'package:datn_test/screens/home_screen_item/class_Permission_form.dart';
 import 'package:datn_test/screens/home_screen_item/pdf_view.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class ClassDetailPage extends StatefulWidget {
   final int classId;
-  ClassDetailPage({Key? key, required this.classId}) : super(key: key);
+  final bool checkPage;
+  ClassDetailPage({Key? key, required this.classId, required this.checkPage})
+      : super(key: key);
 
   @override
   State<ClassDetailPage> createState() => _ClassDetailPageState();
@@ -25,7 +27,7 @@ class _ClassDetailPageState extends State<ClassDetailPage> {
               sessions: 12,
               schedule: '13:00 - 15:00 Mon, Wed, Fri',
               imageUrl: 'assets/icons/read.png',
-              attendenceStatus: true,
+              attendenceStatus: 0,
               document: 'assets/pdf/a.pdf',
             ),
             Class(
@@ -35,7 +37,7 @@ class _ClassDetailPageState extends State<ClassDetailPage> {
               sessions: 12,
               schedule: '13:00 - 15:00 Mon, Wed, Fri',
               imageUrl: 'assets/icons/read.png',
-              attendenceStatus: true,
+              attendenceStatus: 0,
               document: 'assets/pdf/a.pdf',
             ),
             Class(
@@ -45,7 +47,7 @@ class _ClassDetailPageState extends State<ClassDetailPage> {
               sessions: 12,
               schedule: '13:00 - 15:00 Mon, Wed, Fri',
               imageUrl: 'assets/icons/read.png',
-              attendenceStatus: true,
+              attendenceStatus: 0,
               document: 'assets/pdf/a.pdf',
             ),
             Class(
@@ -55,7 +57,7 @@ class _ClassDetailPageState extends State<ClassDetailPage> {
               sessions: 12,
               schedule: '13:00 - 15:00 Mon, Wed, Fri',
               imageUrl: 'assets/icons/read.png',
-              attendenceStatus: true,
+              attendenceStatus: 0,
               document: 'assets/pdf/a.pdf',
             ),
             Class(
@@ -65,7 +67,77 @@ class _ClassDetailPageState extends State<ClassDetailPage> {
               sessions: 12,
               schedule: '13:00 - 15:00 Mon, Wed, Fri',
               imageUrl: 'assets/icons/read.png',
-              attendenceStatus: true,
+              attendenceStatus: 0,
+              document: 'assets/pdf/a.pdf',
+            ),
+            Class(
+              id: 6,
+              name: 'Class reading tutorial 1',
+              teacher: 'Teacher 1',
+              sessions: 12,
+              schedule: '13:00 - 15:00 Mon, Wed, Fri',
+              imageUrl: 'assets/icons/read.png',
+              attendenceStatus: null,
+              document: 'assets/pdf/a.pdf',
+            ),
+            Class(
+              id: 7,
+              name: 'Class reading tutorial 1',
+              teacher: 'Teacher 1',
+              sessions: 12,
+              schedule: '13:00 - 15:00 Mon, Wed, Fri',
+              imageUrl: 'assets/icons/read.png',
+              attendenceStatus: null,
+              document: 'assets/pdf/a.pdf',
+            ),
+            Class(
+              id: 8,
+              name: 'Class reading tutorial 1',
+              teacher: 'Teacher 1',
+              sessions: 12,
+              schedule: '13:00 - 15:00 Mon, Wed, Fri',
+              imageUrl: 'assets/icons/read.png',
+              attendenceStatus: null,
+              document: 'assets/pdf/a.pdf',
+            ),
+            Class(
+              id: 9,
+              name: 'Class reading tutorial 1',
+              teacher: 'Teacher 1',
+              sessions: 12,
+              schedule: '13:00 - 15:00 Mon, Wed, Fri',
+              imageUrl: 'assets/icons/read.png',
+              attendenceStatus: null,
+              document: 'assets/pdf/a.pdf',
+            ),
+            Class(
+              id: 10,
+              name: 'Class reading tutorial 1',
+              teacher: 'Teacher 1',
+              sessions: 12,
+              schedule: '13:00 - 15:00 Mon, Wed, Fri',
+              imageUrl: 'assets/icons/read.png',
+              attendenceStatus: null,
+              document: 'assets/pdf/a.pdf',
+            ),
+            Class(
+              id: 11,
+              name: 'Class reading tutorial 1',
+              teacher: 'Teacher 1',
+              sessions: 12,
+              schedule: '13:00 - 15:00 Mon, Wed, Fri',
+              imageUrl: 'assets/icons/read.png',
+              attendenceStatus: null,
+              document: 'assets/pdf/a.pdf',
+            ),
+            Class(
+              id: 12,
+              name: 'Class reading tutorial 1',
+              teacher: 'Teacher 1',
+              sessions: 12,
+              schedule: '13:00 - 15:00 Mon, Wed, Fri',
+              imageUrl: 'assets/icons/read.png',
+              attendenceStatus: null,
               document: 'assets/pdf/a.pdf',
             ),
           ]
@@ -78,56 +150,116 @@ class _ClassDetailPageState extends State<ClassDetailPage> {
                   sessions: 12,
                   schedule: '13:00 - 15:00 Mon, Wed, Fri',
                   imageUrl: 'assets/icons/read.png',
-                  attendenceStatus: true,
+                  attendenceStatus: 0,
                   document: 'assets/pdf/document.pdf',
                 ),
                 Class(
-                  id: 1,
+                  id: 2,
                   name: 'Class reading tutorial 1',
                   teacher: 'Teacher 1',
                   sessions: 12,
                   schedule: '13:00 - 15:00 Mon, Wed, Fri',
                   imageUrl: 'assets/icons/read.png',
-                  attendenceStatus: true,
+                  attendenceStatus: 0,
                   document: 'assets/pdf/document.pdf',
                 ),
                 Class(
-                  id: 1,
+                  id: 3,
                   name: 'Class reading tutorial 1',
                   teacher: 'Teacher 1',
                   sessions: 12,
                   schedule: '13:00 - 15:00 Mon, Wed, Fri',
                   imageUrl: 'assets/icons/read.png',
-                  attendenceStatus: true,
+                  attendenceStatus: 0,
                   document: 'assets/pdf/document.pdf',
                 ),
                 Class(
-                    id: 1,
+                    id: 4,
                     name: 'Class reading tutorial 1',
                     teacher: 'Teacher 1',
                     sessions: 12,
                     schedule: '13:00 - 15:00 Mon, Wed, Fri',
                     imageUrl: 'assets/icons/read.png',
-                    attendenceStatus: true,
+                    attendenceStatus: 0,
                     document: 'assets/pdf/document.pdf'),
                 Class(
-                  id: 1,
+                  id: 5,
                   name: 'Class reading tutorial 1',
                   teacher: 'Teacher 1',
                   sessions: 12,
                   schedule: '13:00 - 15:00 Mon, Wed, Fri',
                   imageUrl: 'assets/icons/read.png',
-                  attendenceStatus: true,
+                  attendenceStatus: 0,
                   document: 'assets/pdf/document.pdf',
                 ),
                 Class(
-                  id: 1,
+                  id: 6,
                   name: 'Class reading tutorial 1',
                   teacher: 'Teacher 1',
                   sessions: 12,
                   schedule: '13:00 - 15:00 Mon, Wed, Fri',
                   imageUrl: 'assets/icons/read.png',
-                  attendenceStatus: true,
+                  attendenceStatus: 0,
+                  document: 'assets/pdf/document.pdf',
+                ),
+                Class(
+                  id: 7,
+                  name: 'Class reading tutorial 1',
+                  teacher: 'Teacher 1',
+                  sessions: 12,
+                  schedule: '13:00 - 15:00 Mon, Wed, Fri',
+                  imageUrl: 'assets/icons/read.png',
+                  attendenceStatus: null,
+                  document: 'assets/pdf/document.pdf',
+                ),
+                Class(
+                  id: 8,
+                  name: 'Class reading tutorial 1',
+                  teacher: 'Teacher 1',
+                  sessions: 12,
+                  schedule: '13:00 - 15:00 Mon, Wed, Fri',
+                  imageUrl: 'assets/icons/read.png',
+                  attendenceStatus: null,
+                  document: 'assets/pdf/document.pdf',
+                ),
+                Class(
+                  id: 9,
+                  name: 'Class reading tutorial 1',
+                  teacher: 'Teacher 1',
+                  sessions: 12,
+                  schedule: '13:00 - 15:00 Mon, Wed, Fri',
+                  imageUrl: 'assets/icons/read.png',
+                  attendenceStatus: null,
+                  document: 'assets/pdf/document.pdf',
+                ),
+                Class(
+                  id: 10,
+                  name: 'Class reading tutorial 1',
+                  teacher: 'Teacher 1',
+                  sessions: 12,
+                  schedule: '13:00 - 15:00 Mon, Wed, Fri',
+                  imageUrl: 'assets/icons/read.png',
+                  attendenceStatus: null,
+                  document: 'assets/pdf/document.pdf',
+                ),
+                Class(
+                  id: 11,
+                  name: 'Class reading tutorial 1',
+                  teacher: 'Teacher 1',
+                  sessions: 12,
+                  schedule: '13:00 - 15:00 Mon, Wed, Fri',
+                  imageUrl: 'assets/icons/read.png',
+                  attendenceStatus: null,
+                  document: 'assets/pdf/document.pdf',
+                ),
+                Class(
+                  id: 12,
+                  name: 'Class reading tutorial 1',
+                  teacher: 'Teacher 1',
+                  sessions: 12,
+                  schedule: '13:00 - 15:00 Mon, Wed, Fri',
+                  imageUrl: 'assets/icons/read.png',
+                  attendenceStatus: null,
                   document: 'assets/pdf/document.pdf',
                 ),
               ]
@@ -140,57 +272,117 @@ class _ClassDetailPageState extends State<ClassDetailPage> {
                       sessions: 12,
                       schedule: '13:00 - 15:00 Mon, Wed, Fri',
                       imageUrl: 'assets/icons/read.png',
-                      attendenceStatus: true,
+                      attendenceStatus: 0,
                       document: 'assets/pdf/document.pdf',
                     ),
                     Class(
-                      id: 1,
+                      id: 2,
                       name: 'Class reading tutorial 1',
                       teacher: 'Teacher 1',
                       sessions: 12,
                       schedule: '13:00 - 15:00 Mon, Wed, Fri',
                       imageUrl: 'assets/icons/read.png',
-                      attendenceStatus: true,
+                      attendenceStatus: 0,
                       document: 'assets/pdf/document.pdf',
                     ),
                     Class(
-                      id: 1,
+                      id: 3,
                       name: 'Class reading tutorial 1',
                       teacher: 'Teacher 1',
                       sessions: 12,
                       schedule: '13:00 - 15:00 Mon, Wed, Fri',
                       imageUrl: 'assets/icons/read.png',
-                      attendenceStatus: true,
+                      attendenceStatus: 0,
                       document: 'assets/pdf/document.pdf',
                     ),
                     Class(
-                      id: 1,
+                      id: 4,
                       name: 'Class reading tutorial 1',
                       teacher: 'Teacher 1',
                       sessions: 12,
                       schedule: '13:00 - 15:00 Mon, Wed, Fri',
                       imageUrl: 'assets/icons/read.png',
-                      attendenceStatus: true,
+                      attendenceStatus: 0,
                       document: 'assets/pdf/document.pdf',
                     ),
                     Class(
-                      id: 1,
+                      id: 5,
                       name: 'Class reading tutorial 1',
                       teacher: 'Teacher 1',
                       sessions: 12,
                       schedule: '13:00 - 15:00 Mon, Wed, Fri',
                       imageUrl: 'assets/icons/read.png',
-                      attendenceStatus: true,
+                      attendenceStatus: 0,
                       document: 'assets/pdf/document.pdf',
                     ),
                     Class(
-                      id: 1,
+                      id: 6,
                       name: 'Class reading tutorial 1',
                       teacher: 'Teacher 1',
                       sessions: 12,
                       schedule: '13:00 - 15:00 Mon, Wed, Fri',
                       imageUrl: 'assets/icons/read.png',
-                      attendenceStatus: true,
+                      attendenceStatus: 1,
+                      document: 'assets/pdf/document.pdf',
+                    ),
+                    Class(
+                      id: 7,
+                      name: 'Class reading tutorial 1',
+                      teacher: 'Teacher 1',
+                      sessions: 12,
+                      schedule: '13:00 - 15:00 Mon, Wed, Fri',
+                      imageUrl: 'assets/icons/read.png',
+                      attendenceStatus: null,
+                      document: 'assets/pdf/document.pdf',
+                    ),
+                    Class(
+                      id: 8,
+                      name: 'Class reading tutorial 1',
+                      teacher: 'Teacher 1',
+                      sessions: 12,
+                      schedule: '13:00 - 15:00 Mon, Wed, Fri',
+                      imageUrl: 'assets/icons/read.png',
+                      attendenceStatus: null,
+                      document: 'assets/pdf/document.pdf',
+                    ),
+                    Class(
+                      id: 9,
+                      name: 'Class reading tutorial 1',
+                      teacher: 'Teacher 1',
+                      sessions: 12,
+                      schedule: '13:00 - 15:00 Mon, Wed, Fri',
+                      imageUrl: 'assets/icons/read.png',
+                      attendenceStatus: null,
+                      document: 'assets/pdf/document.pdf',
+                    ),
+                    Class(
+                      id: 10,
+                      name: 'Class reading tutorial 1',
+                      teacher: 'Teacher 1',
+                      sessions: 12,
+                      schedule: '13:00 - 15:00 Mon, Wed, Fri',
+                      imageUrl: 'assets/icons/read.png',
+                      attendenceStatus: null,
+                      document: 'assets/pdf/document.pdf',
+                    ),
+                    Class(
+                      id: 11,
+                      name: 'Class reading tutorial 1',
+                      teacher: 'Teacher 1',
+                      sessions: 12,
+                      schedule: '13:00 - 15:00 Mon, Wed, Fri',
+                      imageUrl: 'assets/icons/read.png',
+                      attendenceStatus: null,
+                      document: 'assets/pdf/document.pdf',
+                    ),
+                    Class(
+                      id: 12,
+                      name: 'Class reading tutorial 1',
+                      teacher: 'Teacher 1',
+                      sessions: 12,
+                      schedule: '13:00 - 15:00 Mon, Wed, Fri',
+                      imageUrl: 'assets/icons/read.png',
+                      attendenceStatus: null,
                       document: 'assets/pdf/document.pdf',
                     ),
                   ]
@@ -202,43 +394,126 @@ class _ClassDetailPageState extends State<ClassDetailPage> {
                       sessions: 12,
                       schedule: '13:00 - 15:00 Mon, Wed, Fri',
                       imageUrl: 'assets/icons/read.png',
-                      attendenceStatus: true,
+                      attendenceStatus: 0,
                       document: 'assets/pdf/document.pdf',
                     ),
                     Class(
-                      id: 1,
+                      id: 2,
                       name: 'Class reading tutorial 1',
                       teacher: 'Teacher 1',
                       sessions: 12,
                       schedule: '13:00 - 15:00 Mon, Wed, Fri',
                       imageUrl: 'assets/icons/read.png',
-                      attendenceStatus: true,
+                      attendenceStatus: 0,
                       document: 'assets/pdf/document.pdf',
                     ),
                     Class(
-                      id: 1,
+                      id: 3,
                       name: 'Class reading tutorial 1',
                       teacher: 'Teacher 1',
                       sessions: 12,
                       schedule: '13:00 - 15:00 Mon, Wed, Fri',
                       imageUrl: 'assets/icons/read.png',
-                      attendenceStatus: true,
+                      attendenceStatus: 0,
                       document: 'assets/pdf/document.pdf',
                     ),
                     Class(
-                      id: 1,
+                      id: 4,
                       name: 'Class reading tutorial 1',
                       teacher: 'Teacher 1',
                       sessions: 12,
                       schedule: '13:00 - 15:00 Mon, Wed, Fri',
                       imageUrl: 'assets/icons/read.png',
-                      attendenceStatus: true,
+                      attendenceStatus: 0,
+                      document: 'assets/pdf/document.pdf',
+                    ),
+                    Class(
+                      id: 5,
+                      name: 'Class reading tutorial 1',
+                      teacher: 'Teacher 1',
+                      sessions: 12,
+                      schedule: '13:00 - 15:00 Mon, Wed, Fri',
+                      imageUrl: 'assets/icons/read.png',
+                      attendenceStatus: null,
+                      document: 'assets/pdf/document.pdf',
+                    ),
+                    Class(
+                      id: 6,
+                      name: 'Class reading tutorial 1',
+                      teacher: 'Teacher 1',
+                      sessions: 12,
+                      schedule: '13:00 - 15:00 Mon, Wed, Fri',
+                      imageUrl: 'assets/icons/read.png',
+                      attendenceStatus: null,
+                      document: 'assets/pdf/document.pdf',
+                    ),
+                    Class(
+                      id: 7,
+                      name: 'Class reading tutorial 1',
+                      teacher: 'Teacher 1',
+                      sessions: 12,
+                      schedule: '13:00 - 15:00 Mon, Wed, Fri',
+                      imageUrl: 'assets/icons/read.png',
+                      attendenceStatus: null,
+                      document: 'assets/pdf/document.pdf',
+                    ),
+                    Class(
+                      id: 8,
+                      name: 'Class reading tutorial 1',
+                      teacher: 'Teacher 1',
+                      sessions: 12,
+                      schedule: '13:00 - 15:00 Mon, Wed, Fri',
+                      imageUrl: 'assets/icons/read.png',
+                      attendenceStatus: null,
+                      document: 'assets/pdf/document.pdf',
+                    ),
+                    Class(
+                      id: 9,
+                      name: 'Class reading tutorial 1',
+                      teacher: 'Teacher 1',
+                      sessions: 12,
+                      schedule: '13:00 - 15:00 Mon, Wed, Fri',
+                      imageUrl: 'assets/icons/read.png',
+                      attendenceStatus: null,
+                      document: 'assets/pdf/document.pdf',
+                    ),
+                    Class(
+                      id: 10,
+                      name: 'Class reading tutorial 1',
+                      teacher: 'Teacher 1',
+                      sessions: 12,
+                      schedule: '13:00 - 15:00 Mon, Wed, Fri',
+                      imageUrl: 'assets/icons/read.png',
+                      attendenceStatus: null,
+                      document: 'assets/pdf/document.pdf',
+                    ),
+                    Class(
+                      id: 11,
+                      name: 'Class reading tutorial 1',
+                      teacher: 'Teacher 1',
+                      sessions: 12,
+                      schedule: '13:00 - 15:00 Mon, Wed, Fri',
+                      imageUrl: 'assets/icons/read.png',
+                      attendenceStatus: null,
+                      document: 'assets/pdf/document.pdf',
+                    ),
+                    Class(
+                      id: 12,
+                      name: 'Class reading tutorial 1',
+                      teacher: 'Teacher 1',
+                      sessions: 12,
+                      schedule: '13:00 - 15:00 Mon, Wed, Fri',
+                      imageUrl: 'assets/icons/read.png',
+                      attendenceStatus: null,
                       document: 'assets/pdf/document.pdf',
                     ),
                   ];
+    List<Class> classDetailNew = widget.checkPage == false
+        ? classDetail.where((item) => item.attendenceStatus == null).toList()
+        : classDetail.where((item) => item.attendenceStatus != null).toList();
     return Scaffold(
         appBar: AppBar(
-          title: Text('Your Classes'),
+          title: Text('Your Classes Detail'),
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () {
@@ -247,59 +522,79 @@ class _ClassDetailPageState extends State<ClassDetailPage> {
           ),
         ),
         body: ListView.builder(
-            itemCount: classDetail.length,
+            itemCount: classDetailNew.length,
             itemBuilder: (context, index) {
-              return Card(
-                child: Container(
+              return GestureDetector(
+                onTap: () {
+                  if (widget.checkPage == false) {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => PermissionForm(
+                                  classInfo: classDetailNew[index],
+                                )));
+                  }
+                },
+                child: Card(
                   margin: EdgeInsets.all(8.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Hello ${classDetail[index].name}",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18.0,
-                        ),
-                      ),
-                      Text("${classDetail[index].schedule}"),
-                      Text("${classDetail[index].teacher}"),
-                      Text(
-                          "Lesson ${index + 1}/${classDetail[index].sessions}"),
-                      Row(
-                        children: [
-                          Text("Attendence Status"),
-                          Checkbox(
-                            value: classDetail[index]
-                                .attendenceStatus, // Giá trị của checkbox dựa trên dữ liệu kiểu bool
-                            onChanged: null,
-                          ),
-                        ],
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => PdfViewController(
-                                      url:
-                                          'https://cdn.syncfusion.com/content/PDFViewer/flutter-succinctly.pdf',
-                                      title: '${classDetail[index].name}',
-                                    )),
-                          );
-                        },
-                        child: Text(
-                          "Documents After Class",
+                  elevation: 4.0,
+                  child: Container(
+                    margin: EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "${classDetailNew[index].name}",
                           style: TextStyle(
-                            decoration:
-                                TextDecoration.underline, // Thêm gạch chân
-                            decorationColor: Colors.blue, // Màu của gạch chân
-                            decorationThickness: 2, // Độ dày của gạch chân
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18.0,
                           ),
                         ),
-                      ),
-                    ],
+                        Text("${classDetailNew[index].schedule}"),
+                        Text("${classDetailNew[index].teacher}"),
+                        Text(
+                            "Lesson ${index + 1}/${classDetailNew[index].sessions}"),
+                        Row(
+                          children: [
+                            Text("Attendence Status: " +
+                                "${classDetailNew[index].attendenceStatus != null ? classDetailNew[index].attendenceStatus == 0 ? "Attendance" : classDetail[index].attendenceStatus == 1 ? "Authorized absence" : "Absence without permission" : ""}"),
+                            // Checkbox(
+                            //   value: classDetail[index]
+                            //       .attendenceStatus, // Giá trị của checkbox dựa trên dữ liệu kiểu bool
+                            //   onChanged: null,
+                            // ),
+                          ],
+                        ),
+                        widget.checkPage == true
+                            ? GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => PdfViewController(
+                                              url:
+                                                  'https://cdn.syncfusion.com/content/PDFViewer/flutter-succinctly.pdf',
+                                              title:
+                                                  '${classDetail[index].name}',
+                                            )),
+                                  );
+                                },
+                                child: Text(
+                                  "Documents After Class",
+                                  style: TextStyle(
+                                    decoration: TextDecoration
+                                        .underline, // Thêm gạch chân
+                                    decorationColor:
+                                        Colors.blue, // Màu của gạch chân
+                                    decorationThickness:
+                                        2, // Độ dày của gạch chân
+                                  ),
+                                ),
+                              )
+                            : SizedBox(),
+                      ],
+                    ),
                   ),
                 ),
               );
