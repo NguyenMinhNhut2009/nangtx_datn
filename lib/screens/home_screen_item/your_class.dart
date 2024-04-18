@@ -9,32 +9,40 @@ class YourClass extends StatelessWidget {
   YourClass({Key? key}) : super(key: key);
   final List<Class> classes = [
     Class(
+      id: 1,
       name: 'Class reading tutorial 1',
       teacher: 'Teacher 1',
-      sessions: "10/12",
+      sessions: 12,
       schedule: '13:00 - 15:00 Mon, Wed, Fri',
       imageUrl: 'assets/icons/read.png',
+      numberOfLessonsStudied: 5,
     ),
     Class(
+      id: 2,
       name: 'Class speaking tutorial 1',
       teacher: 'Teacher 2',
-      sessions: "11/12",
+      sessions: 12,
       schedule: '13:00 - 15:00 Mon, Wed, Fri',
       imageUrl: 'assets/icons/speak.png',
+      numberOfLessonsStudied: 6,
     ),
     Class(
+      id: 3,
       name: 'Class writing tutorial 1',
       teacher: 'Teacher 3',
-      sessions: "11/12",
+      sessions: 12,
       schedule: '13:00 - 15:00 Mon, Wed, Fri',
       imageUrl: 'assets/icons/write.png',
+      numberOfLessonsStudied: 6,
     ),
     Class(
+      id: 4,
       name: 'Class listening tutorial 1',
       teacher: 'Teacher 4',
-      sessions: "11/12",
+      sessions: 12,
       schedule: '13:00 - 15:00 Mon, Wed, Fri',
       imageUrl: 'assets/icons/listen.png',
+      numberOfLessonsStudied: 4,
     ),
   ];
 

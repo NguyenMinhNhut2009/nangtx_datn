@@ -1,3 +1,4 @@
+import 'package:datn_test/screens/home_screen_item/class_detail.dart';
 import 'package:flutter/material.dart';
 
 import '../model/class.dart';
@@ -74,7 +75,8 @@ class ClassListItem extends StatelessWidget {
                 SizedBox(
                   width: 5,
                 ),
-                Text("Lesson " + classInfo.sessions),
+                Text(
+                    "Lesson: ${classInfo.numberOfLessonsStudied}/${classInfo.sessions}"),
               ],
             ),
             SizedBox(
@@ -103,7 +105,14 @@ class ClassListItem extends StatelessWidget {
               height: 10,
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ClassDetailPage(
+                              classId: classInfo.id,
+                            )));
+              },
               child: Ink(
                 padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(

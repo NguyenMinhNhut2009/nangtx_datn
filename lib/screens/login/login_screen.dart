@@ -21,7 +21,11 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return SafeArea(
+    return WillPopScope(
+      onWillPop: () async {
+        // Trả về false để ngăn chặn việc quay lại
+        return false;
+      },
       child: Scaffold(
         body: SizedBox(
           width: size.width,
