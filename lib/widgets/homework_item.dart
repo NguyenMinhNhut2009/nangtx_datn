@@ -1,3 +1,4 @@
+import 'package:datn_test/screens/home_screen_item/class_your_assignment.dart';
 import 'package:flutter/material.dart';
 
 import '../model/class.dart';
@@ -34,12 +35,12 @@ class HomeworkListItem extends StatelessWidget {
             ],
             image: DecorationImage(
               fit: BoxFit.cover,
-              image: AssetImage(hwInfo.imageUrl),
+              image: AssetImage(hwInfo.imageUrl!),
             ),
           ),
         ),
         title: Text(
-          hwInfo.name,
+          hwInfo.assignmentName!,
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 18.0,
@@ -60,7 +61,7 @@ class HomeworkListItem extends StatelessWidget {
                 SizedBox(
                   width: 5,
                 ),
-                Text(hwInfo.nameClass),
+                Text(hwInfo.nameClass!),
               ],
             ),
             SizedBox(
@@ -75,7 +76,7 @@ class HomeworkListItem extends StatelessWidget {
                 SizedBox(
                   width: 5,
                 ),
-                Text(hwInfo.teacher),
+                Text(hwInfo.teacher!),
               ],
             ),
             SizedBox(
@@ -84,13 +85,13 @@ class HomeworkListItem extends StatelessWidget {
             Row(
               children: [
                 Icon(
-                  Icons.timeline_outlined,
+                  Icons.quiz,
                   size: 16,
                 ),
                 SizedBox(
                   width: 5,
                 ),
-                Text(hwInfo.time),
+                Text("${hwInfo.numberOfQuestion!}"),
               ],
             ),
             SizedBox(
@@ -105,7 +106,7 @@ class HomeworkListItem extends StatelessWidget {
                 SizedBox(
                   width: 5,
                 ),
-                Text(hwInfo.dueDate),
+                Text(hwInfo.dueDate!),
               ],
             ),
           ],
@@ -116,7 +117,14 @@ class HomeworkListItem extends StatelessWidget {
               height: 10,
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => YourAssignemt(
+                              id: hwInfo.id!,
+                            )));
+              },
               child: Ink(
                 padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(

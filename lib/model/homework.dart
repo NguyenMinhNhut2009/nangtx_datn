@@ -1,17 +1,21 @@
 class Homework {
-  final String name;
-  final String nameClass;
-  final String teacher;
-  final String dueDate;
-  final String time;
-  final String imageUrl;
+  final int? id;
+  final String? assignmentName;
+  final String? nameClass;
+  final String? teacher;
+  final String? dueDate;
+  final String? time;
+  final String? imageUrl;
+  final int? numberOfQuestion;
 
   Homework({
-    required this.name,
-    required this.teacher,
-    required this.nameClass,
-    required this.dueDate,
-    required this.time,
-    required this.imageUrl,
+    this.id,
+    this.assignmentName,
+    this.teacher,
+    this.nameClass,
+    this.dueDate,
+    this.time,
+    this.imageUrl,
+    this.numberOfQuestion,
   });
 }

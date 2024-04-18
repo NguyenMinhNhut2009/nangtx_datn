@@ -3,15 +3,20 @@ import 'package:datn_test/screens/home_screen_item/pdf_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class ClassDetailPage extends StatelessWidget {
+class ClassDetailPage extends StatefulWidget {
   final int classId;
   ClassDetailPage({Key? key, required this.classId}) : super(key: key);
 
   @override
+  State<ClassDetailPage> createState() => _ClassDetailPageState();
+}
+
+class _ClassDetailPageState extends State<ClassDetailPage> {
+  @override
   Widget build(BuildContext context) {
     bool isChecked = false;
 
-    List<Class>? classDetail = classId == 1
+    List<Class>? classDetail = widget.classId == 1
         ? [
             Class(
               id: 1,
@@ -64,7 +69,7 @@ class ClassDetailPage extends StatelessWidget {
               document: 'assets/pdf/a.pdf',
             ),
           ]
-        : classId == 2
+        : widget.classId == 2
             ? [
                 Class(
                   id: 1,
@@ -126,7 +131,7 @@ class ClassDetailPage extends StatelessWidget {
                   document: 'assets/pdf/document.pdf',
                 ),
               ]
-            : classId == 3
+            : widget.classId == 3
                 ? [
                     Class(
                       id: 1,
