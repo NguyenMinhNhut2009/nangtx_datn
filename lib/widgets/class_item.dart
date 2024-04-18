@@ -68,7 +68,7 @@ class ClassListItem extends StatelessWidget {
             Row(
               children: [
                 Icon(
-                  Icons.class__rounded,
+                  Icons.class_rounded,
                   size: 16,
                 ),
                 SizedBox(
@@ -103,9 +103,7 @@ class ClassListItem extends StatelessWidget {
               height: 10,
             ),
             InkWell(
-              onTap: () {
-                
-              },
+              onTap: () {},
               child: Ink(
                 padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(

@@ -28,7 +28,7 @@ class ProfilePage extends StatelessWidget {
                     height: kSpacingUnit * 2.5,
                     width: kSpacingUnit * 2.5,
                     decoration: BoxDecoration(
-                      color: Theme.of(context).accentColor,
+                      color: Theme.of(context).canvasColor,
                       shape: BoxShape.circle,
                     ),
                     child: Center(

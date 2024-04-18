@@ -54,7 +54,7 @@ class HomeworkListItem extends StatelessWidget {
             Row(
               children: [
                 Icon(
-                  Icons.class__outlined,
+                  Icons.class_outlined,
                   size: 16,
                 ),
                 SizedBox(
