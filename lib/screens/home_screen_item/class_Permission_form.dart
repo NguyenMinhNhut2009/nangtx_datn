@@ -130,10 +130,21 @@ class _PermissionFormState extends State<PermissionForm> {
                   textAlign: TextAlign.start,
                   maxLines: 4,
                   controller: reasonPleaseThink,
+                  cursorColor: Colors.black,
                   decoration: InputDecoration(
-                      alignLabelWithHint: true,
-                      labelText: 'Please enter a reason',
-                      border: OutlineInputBorder()),
+                    floatingLabelBehavior: FloatingLabelBehavior.never,
+                    alignLabelWithHint: true,
+                    labelText: 'Please enter a reason',
+                    border: OutlineInputBorder(),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          color: Colors.black), // Màu viền khi không focus
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Colors.black), // Màu viền khi focus
+                    ),
+                  ),
                 ),
                 SizedBox(
                   height: 20,

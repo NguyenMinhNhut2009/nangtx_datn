@@ -553,12 +553,11 @@ class _ClassDetailPageState extends State<ClassDetailPage> {
                         ),
                         Text("${classDetailNew[index].schedule}"),
                         Text("${classDetailNew[index].teacher}"),
-                        Text(
-                            "Lesson ${index + 1}/${classDetailNew[index].sessions}"),
+                        Text("Lesson: ${classDetailNew[index].sessions}"),
                         Row(
                           children: [
                             Text("Attendence Status: " +
-                                "${classDetailNew[index].attendenceStatus != null ? classDetailNew[index].attendenceStatus == 0 ? "Attendance" : classDetail[index].attendenceStatus == 1 ? "Authorized absence" : "Absence without permission" : ""}"),
+                                "${classDetailNew[index].attendenceStatus != null ? classDetailNew[index].attendenceStatus == 0 ? "Attendance" : classDetail[index].attendenceStatus == 1 ? "Authorized absence" : "Absence without permission" : "None"}"),
                             // Checkbox(
                             //   value: classDetail[index]
                             //       .attendenceStatus, // Giá trị của checkbox dựa trên dữ liệu kiểu bool
