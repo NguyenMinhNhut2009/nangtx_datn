@@ -3,8 +3,10 @@ import 'package:datn_test/constants/constants.dart';
 import 'package:datn_test/model/asignment.dart';
 import 'package:datn_test/model/class.dart';
 import 'package:datn_test/model/homework.dart';
+import 'package:datn_test/model/leave_apply.dart';
 import 'package:datn_test/model/user.dart';
 import 'package:datn_test/navigator.dart';
+import 'package:datn_test/screens/home_screen_item/leave_apply.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:datn_test/globals.dart' as globals;
@@ -31,6 +33,7 @@ Future<void> validateAndSubmit(
       globals.accessToken = jsonResponse["access_token"];
       globals.tokenType = jsonResponse["type_token"];
 
+      print('token: $jsonResponse["access_token"]');
       // //get user
       // response = await http.get(
       //   Uri.parse(urlUser),
@@ -180,6 +183,8 @@ Future<User?> getUserInfor() async {
     print(response);
     if (response.statusCode == 200) {
       var data = User.fromJson(jsonDecode(response.body)["data"]);
+      globals.userId = data.id!;
+      globals.fullName = data.name!;
       return data;
     } else {
       return null;
@@ -265,6 +270,67 @@ Future<List<Question>> getListQuestion(int id) async {
       return parseQuestionList(response.body);
     } else {
       return [];
+    }
+  } catch (e) {
+    throw (e);
+  }
+}
+
+Future<List<LeaveApplyModel>> getLeaveApply() async {
+  try {
+    var response = await http.get(
+      Uri.parse("$urlGetClassLeaveApply"),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ${globals.accessToken}',
+      },
+    );
+    if (response.statusCode == 200) {
+      return parseLeaveApplyList(response.body);
+    } else {
+      return [];
+    }
+  } catch (e) {
+    throw (e);
+  }
+}
+
+Future<List<ClassList>> getLeaveApplyList() async {
+  try {
+    var response = await http.get(
+      Uri.parse(urlGetListClassLeaeveApplyInfo),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ${globals.accessToken}',
+      },
+    );
+    if (response.statusCode == 200) {
+      return parseClassList(response.body);
+    } else {
+      return [];
+    }
+  } catch (e) {
+    throw (e);
+  }
+}
+
+Future<bool> postAttendanceStore(
+    String studentId, String lessonId, String reason) async {
+  try {
+    var url = Uri.parse(urlPostStoreAttendance);
+
+    var formData = http.MultipartRequest('POST', url);
+    formData.fields.addAll(
+        {'student_id': studentId, 'lesson_id': lessonId, 'reason': reason});
+
+    var response = await formData.send();
+    print(response);
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
     }
   } catch (e) {
     throw (e);

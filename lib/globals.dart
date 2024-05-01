@@ -12,3 +12,5 @@ List<Container> lessonHomes = [];
 List<Container> taskItems = [];
 List<Homework> homeworks = [];
 List<Homework> exams = [];
+
+int userId = 0;

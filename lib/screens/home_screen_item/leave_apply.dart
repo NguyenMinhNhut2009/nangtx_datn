@@ -1,50 +1,35 @@
 import 'package:datn_test/constants/ui_constants.dart';
 import 'package:datn_test/model/class.dart';
+import 'package:datn_test/model/leave_apply.dart';
+import 'package:datn_test/screens/home_screen_item/class_Permission_form.dart';
+import 'package:datn_test/screens/home_screen_item/leave_apply_item.dart';
+import 'package:datn_test/screens/login/login_api.dart';
 import 'package:datn_test/widgets/class_item.dart';
 import 'package:flutter/material.dart';
 
-class LeaveApply extends StatelessWidget {
+class LeaveApply extends StatefulWidget {
   LeaveApply({
     Key? key,
   }) : super(key: key);
-  final List<Class> classes = [
-    Class(
-      id: 1,
-      name: 'Class reading tutorial 1',
-      teacher: 'Teacher 1',
-      sessions: 12,
-      schedule: '13:00 - 15:00 Mon, Wed, Fri',
-      imageUrl: 'assets/icons/read.png',
-      numberOfLessonsStudied: 5,
-    ),
-    Class(
-      id: 2,
-      name: 'Class speaking tutorial 1',
-      teacher: 'Teacher 2',
-      sessions: 12,
-      schedule: '13:00 - 15:00 Mon, Wed, Fri',
-      imageUrl: 'assets/icons/speak.png',
-      numberOfLessonsStudied: 6,
-    ),
-    Class(
-      id: 3,
-      name: 'Class writing tutorial 1',
-      teacher: 'Teacher 3',
-      sessions: 12,
-      schedule: '13:00 - 15:00 Mon, Wed, Fri',
-      imageUrl: 'assets/icons/write.png',
-      numberOfLessonsStudied: 6,
-    ),
-    Class(
-      id: 4,
-      name: 'Class listening tutorial 1',
-      teacher: 'Teacher 4',
-      sessions: 12,
-      schedule: '13:00 - 15:00 Mon, Wed, Fri',
-      imageUrl: 'assets/icons/listen.png',
-      numberOfLessonsStudied: 4,
-    ),
-  ];
+
+  @override
+  State<LeaveApply> createState() => _LeaveApplyState();
+}
+
+class _LeaveApplyState extends State<LeaveApply> {
+  List<LeaveApplyModel> listLeaveApply = [];
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    loadData();
+  }
+
+  loadData() async {
+    listLeaveApply = await getLeaveApply();
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,16 +41,24 @@ class LeaveApply extends StatelessWidget {
             Navigator.of(context).pop();
           },
         ),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => PermissionForm()));
+              },
+              icon: Icon(Icons.add))
+        ],
       ),
-      body: ListView.builder(
-        itemCount: classes.length,
-        itemBuilder: (context, index) {
-          return Container();
-          // ClassListItem(
-          //   // classInfo: classes[index],
-          //   checkPage: false,
-          // );
-        },
+      body: Expanded(
+        child: ListView.builder(
+          itemCount: listLeaveApply.length,
+          itemBuilder: (context, index) {
+            return LeaveApplyItem(
+              data: listLeaveApply[index],
+            );
+          },
+        ),
       ),
     );
   }

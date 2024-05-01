@@ -24,6 +24,7 @@ dependencies:
   timer_count_down: ^2.2.2
   percent_indicator: ^4.2.3
   shared_preferences: ^2.2.3
+  fluttertoast: ^8.1.1
 
 dev_dependencies:
   flutter_test:

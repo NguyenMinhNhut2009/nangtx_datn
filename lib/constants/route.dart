@@ -23,3 +23,13 @@ const urlGetListHomeWork = '$urlBase/api/homework/lists';
 
 //api get List question homeWork
 const urlGetQuestionHomeWork = '$urlBase/api/homework/questions';
+//api get list Leave Apply
+const urlGetClassLeaveApply = '$urlBase/api/attendance/lists';
+
+// api get list leaveA Apply info
+
+const urlGetListClassLeaeveApplyInfo = '$urlBase/api/attendance/info_classes';
+
+// api Store Attendance
+
+const urlPostStoreAttendance = '$urlBase/api/attendance/store';

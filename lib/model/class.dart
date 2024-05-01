@@ -1,32 +1,32 @@
 import 'dart:convert';
 
-class Class {
-  final int id;
-  final String name;
-  final String teacher;
-  final int sessions;
-  final String schedule;
-  final String imageUrl;
-  final int? attendenceStatus;
-  final int? numberOfLessonsStudied;
-  final String? document;
+// class Class {
+//   final int id;
+//   final String name;
+//   final String teacher;
+//   final int sessions;
+//   final String schedule;
+//   final String imageUrl;
+//   final int? attendenceStatus;
+//   final int? numberOfLessonsStudied;
+//   final String? document;
 
-  Class(
-      {required this.id,
-      required this.name,
-      required this.teacher,
-      required this.sessions,
-      required this.schedule,
-      required this.imageUrl,
-      this.attendenceStatus,
-      this.numberOfLessonsStudied,
-      this.document});
-}
+//   Class(
+//       {required this.id,
+//       required this.name,
+//       required this.teacher,
+//       required this.sessions,
+//       required this.schedule,
+//       required this.imageUrl,
+//       this.attendenceStatus,
+//       this.numberOfLessonsStudied,
+//       this.document});
+// }
 
-class ClassDetail {
-  List<Class>? classDetail;
-  ClassDetail({this.classDetail});
-}
+// class ClassDetail {
+//   List<Class>? classDetail;
+//   ClassDetail({this.classDetail});
+// }
 
 class ClassList {
   int? id;
@@ -40,6 +40,8 @@ class ClassList {
   List<Lessons>? lessons;
   Room? room;
   Teacher? teacher;
+  String? createdAt;
+  String? updatedAt;
 
   ClassList(
       {this.id,
@@ -52,7 +54,9 @@ class ClassList {
       this.numberOfLessonsStudied,
       this.lessons,
       this.room,
-      this.teacher});
+      this.teacher,
+      this.createdAt,
+      this.updatedAt});
 
   ClassList.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -72,6 +76,8 @@ class ClassList {
     room = json['room'] != null ? new Room.fromJson(json['room']) : null;
     teacher =
         json['teacher'] != null ? new Teacher.fromJson(json['teacher']) : null;
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
   }
 
   Map<String, dynamic> toJson() {
@@ -93,6 +99,8 @@ class ClassList {
     if (this.teacher != null) {
       data['teacher'] = this.teacher!.toJson();
     }
+    data['created_at'] = this.createdAt;
+    data['updated_at'] = this.updatedAt;
     return data;
   }
 }

@@ -1,11 +1,15 @@
 import 'package:datn_test/model/class.dart';
+import 'package:datn_test/screens/login/login_api.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:datn_test/globals.dart' as globals;
 import 'package:flutter/widgets.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class PermissionForm extends StatefulWidget {
-  final Class classInfo;
-  const PermissionForm({super.key, required this.classInfo});
+  const PermissionForm({
+    super.key,
+  });
 
   @override
   State<PermissionForm> createState() => _PermissionFormState();
@@ -17,14 +21,19 @@ class _PermissionFormState extends State<PermissionForm> {
   TextEditingController nameOfInstructorVC = TextEditingController(text: '');
   TextEditingController dateOfTimeVC = TextEditingController(text: '');
   TextEditingController reasonPleaseThink = TextEditingController(text: '');
+  int? id;
+  List<ClassList> leaveApplyList = [];
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    firstAndLastNameVC.text = "Nguyen Van A";
-    nameOfSubjectVC.text = widget.classInfo.name;
-    nameOfInstructorVC.text = widget.classInfo.teacher;
-    dateOfTimeVC.text = widget.classInfo.schedule;
+    firstAndLastNameVC.text = globals.fullName;
+    loadData();
+  }
+
+  loadData() async {
+    leaveApplyList = await getLeaveApplyList();
+    setState(() {});
   }
 
   @override
@@ -71,53 +80,46 @@ class _PermissionFormState extends State<PermissionForm> {
                 SizedBox(
                   height: 20,
                 ),
-                Text("Name of Subject"),
+                // Text("Subject Title"),
+                // SizedBox(
+                //   height: 15,
+                // ),
+                // GestureDetector(
+                //   onTap: () {
+                //     _showItemAndLessonBottomSheet(context);
+                //   },
+                //   child: TextFormField(
+                //     // initialValue: firstAndLastNameVC.text,
+                //     readOnly: true,
+                //     enabled:
+                //         false, // Đặt readOnly thành true để ngăn người dùng chỉnh sửa
+                //     decoration: InputDecoration(
+                //         hintText: nameOfSubjectVC.text,
+                //         // labelText: firstAndLastNameVC.text,
+                //         border: OutlineInputBorder()),
+                //   ),
+                // ),
+                // SizedBox(
+                //   height: 20,
+                // ),
+                Text("Name of the lesson"),
                 SizedBox(
                   height: 15,
                 ),
-                TextFormField(
-                  // initialValue: firstAndLastNameVC.text,
-                  readOnly: true,
-                  enabled:
-                      false, // Đặt readOnly thành true để ngăn người dùng chỉnh sửa
-                  decoration: InputDecoration(
-                      hintText: nameOfSubjectVC.text,
-                      // labelText: firstAndLastNameVC.text,
-                      border: OutlineInputBorder()),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Text("Name of Instructor"),
-                SizedBox(
-                  height: 15,
-                ),
-                TextFormField(
-                  // initialValue: firstAndLastNameVC.text,
-                  readOnly: true,
-                  enabled:
-                      false, // Đặt readOnly thành true để ngăn người dùng chỉnh sửa
-                  decoration: InputDecoration(
-                      hintText: nameOfInstructorVC.text,
-                      // labelText: firstAndLastNameVC.text,
-                      border: OutlineInputBorder()),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Text("Date of Time"),
-                SizedBox(
-                  height: 15,
-                ),
-                TextFormField(
-                  // initialValue: firstAndLastNameVC.text,
-                  readOnly: true,
-                  enabled:
-                      false, // Đặt readOnly thành true để ngăn người dùng chỉnh sửa
-                  decoration: InputDecoration(
-                      hintText: dateOfTimeVC.text,
-                      // labelText: firstAndLastNameVC.text,
-                      border: OutlineInputBorder()),
+                GestureDetector(
+                  onTap: () {
+                    _showItemAndLessonBottomSheet(context);
+                  },
+                  child: TextFormField(
+                    // initialValue: firstAndLastNameVC.text,
+                    readOnly: true,
+                    enabled:
+                        false, // Đặt readOnly thành true để ngăn người dùng chỉnh sửa
+                    decoration: InputDecoration(
+                        hintText: nameOfInstructorVC.text,
+                        // labelText: firstAndLastNameVC.text,
+                        border: OutlineInputBorder()),
+                  ),
                 ),
                 SizedBox(
                   height: 20,
@@ -155,7 +157,7 @@ class _PermissionFormState extends State<PermissionForm> {
           SafeArea(
               child: GestureDetector(
             onTap: () {
-              Navigator.pop(context);
+              submit();
             },
             child: Container(
               margin: EdgeInsets.all(8.0),
@@ -168,5 +170,85 @@ class _PermissionFormState extends State<PermissionForm> {
         ],
       ),
     );
+  }
+
+  void _showItemAndLessonBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return ListView.builder(
+            itemCount: leaveApplyList.length,
+            itemBuilder: (context, index) {
+              return GestureDetector(
+                onTap: () async {
+                  Navigator.pop(context);
+                  _showLessonsBottomSheet(context, leaveApplyList[index]);
+                  // setState(() {
+                  //   nameOfSubjectVC.text = leaveApplyList[index].name!;
+                  // });
+                },
+                child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(18),
+                          topRight: Radius.circular(18),
+                        )),
+                    padding: EdgeInsets.all(12.0),
+                    child: Text(
+                      leaveApplyList[index].name!,
+                      style: TextStyle(fontSize: 15),
+                    )),
+              );
+            });
+      },
+    );
+  }
+
+  void _showLessonsBottomSheet(BuildContext context, ClassList data) {
+    List<Lessons> lessons = data.lessons!;
+
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          child: ListView.builder(
+            itemCount: lessons.length,
+            itemBuilder: (context, index) {
+              final lesson = lessons[index];
+              return ListTile(
+                title: Text(lesson.lessonName!),
+                onTap: () {
+                  setState(() {
+                    nameOfInstructorVC.text = lesson.lessonName!;
+                    id = lesson.id;
+                  });
+                  print("lesson abc $id");
+                  Navigator.pop(context, lesson.id);
+                },
+              );
+            },
+          ),
+        );
+      },
+    );
+  }
+
+  void submit() async {
+    if (reasonPleaseThink.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Reason is not allowed to be empty"),
+        ),
+      );
+      return;
+    }
+    try {
+      await postAttendanceStore(
+          globals.userId.toString(), id!.toString(), reasonPleaseThink.text);
+      Navigator.pop(context);
+    } catch (e) {
+      throw (e);
+    }
   }
 }
