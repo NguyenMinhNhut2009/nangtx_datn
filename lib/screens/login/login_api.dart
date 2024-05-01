@@ -4,6 +4,7 @@ import 'package:datn_test/model/asignment.dart';
 import 'package:datn_test/model/class.dart';
 import 'package:datn_test/model/homework.dart';
 import 'package:datn_test/model/leave_apply.dart';
+import 'package:datn_test/model/teacher.dart';
 import 'package:datn_test/model/user.dart';
 import 'package:datn_test/navigator.dart';
 import 'package:datn_test/screens/home_screen_item/leave_apply.dart';
@@ -331,6 +332,26 @@ Future<bool> postAttendanceStore(
       return true;
     } else {
       return false;
+    }
+  } catch (e) {
+    throw (e);
+  }
+}
+
+Future<List<TeacherList>> getTeacherList() async {
+  try {
+    var response = await http.get(
+      Uri.parse(urlGetTeacherList),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ${globals.accessToken}',
+      },
+    );
+    if (response.statusCode == 200) {
+      return parseTeacherList(response.body);
+    } else {
+      return [];
     }
   } catch (e) {
     throw (e);

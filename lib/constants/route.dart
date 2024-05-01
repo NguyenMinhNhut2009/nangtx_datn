@@ -33,3 +33,6 @@ const urlGetListClassLeaeveApplyInfo = '$urlBase/api/attendance/info_classes';
 // api Store Attendance
 
 const urlPostStoreAttendance = '$urlBase/api/attendance/store';
+
+//api get teacher list
+const urlGetTeacherList = '$urlBase/api/teacher/lists';
