@@ -40,16 +40,16 @@ class _MainFunctionState extends State<MainFunction> {
               title: "Home Work",
               icon: "assets/icons/house.png",
             ),
-            CustomIconButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ExamSchedule()),
-                );
-              },
-              title: "Exam",
-              icon: "assets/icons/exam.png",
-            ),
+            // CustomIconButton(
+            //   onPressed: () {
+            //     Navigator.push(
+            //       context,
+            //       MaterialPageRoute(builder: (context) => ExamSchedule()),
+            //     );
+            //   },
+            //   title: "Exam",
+            //   icon: "assets/icons/exam.png",
+            // ),
           ],
         ),
         SizedBox(

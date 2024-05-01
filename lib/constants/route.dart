@@ -16,3 +16,10 @@ const urlGetClassList = '$urlBase/api/class/list';
 //api getClassDetail
 
 const urlGetClassDetial = '$urlBase/api/class/detail';
+
+//api get List HomeWok
+
+const urlGetListHomeWork = '$urlBase/api/homework/lists';
+
+//api get List question homeWork
+const urlGetQuestionHomeWork = '$urlBase/api/homework/questions';

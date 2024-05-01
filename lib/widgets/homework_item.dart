@@ -5,7 +5,7 @@ import '../model/class.dart';
 import '../model/homework.dart';
 
 class HomeworkListItem extends StatelessWidget {
-  final Homework hwInfo;
+  final HomeWork hwInfo;
 
   HomeworkListItem({required this.hwInfo});
 
@@ -33,10 +33,10 @@ class HomeworkListItem extends StatelessWidget {
                 spreadRadius: 8,
               )
             ],
-            image: DecorationImage(
-              fit: BoxFit.cover,
-              image: AssetImage(hwInfo.imageUrl!),
-            ),
+            // image: DecorationImage(
+            //   fit: BoxFit.cover,
+            //   image: AssetImage(hwInfo.!),
+            // ),
           ),
         ),
         title: Text(
@@ -85,28 +85,13 @@ class HomeworkListItem extends StatelessWidget {
             Row(
               children: [
                 Icon(
-                  Icons.quiz,
-                  size: 16,
-                ),
-                SizedBox(
-                  width: 5,
-                ),
-                Text("${hwInfo.numberOfQuestion!}"),
-              ],
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            Row(
-              children: [
-                Icon(
                   Icons.schedule_rounded,
                   size: 16,
                 ),
                 SizedBox(
                   width: 5,
                 ),
-                Text(hwInfo.dueDate!),
+                Text("${hwInfo.time!}"),
               ],
             ),
           ],

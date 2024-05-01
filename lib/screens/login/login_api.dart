@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:datn_test/constants/constants.dart';
+import 'package:datn_test/model/asignment.dart';
 import 'package:datn_test/model/class.dart';
 import 'package:datn_test/model/homework.dart';
 import 'package:datn_test/model/user.dart';
@@ -222,6 +223,46 @@ Future<List<ClassList>> getClassDetail(int id) async {
     );
     if (response.statusCode == 200) {
       return parseClassList(response.body);
+    } else {
+      return [];
+    }
+  } catch (e) {
+    throw (e);
+  }
+}
+
+Future<List<HomeWork>> getListHomeWork() async {
+  try {
+    var response = await http.get(
+      Uri.parse("$urlGetListHomeWork"),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ${globals.accessToken}',
+      },
+    );
+    if (response.statusCode == 200) {
+      return parseHomeWorkList(response.body);
+    } else {
+      return [];
+    }
+  } catch (e) {
+    throw (e);
+  }
+}
+
+Future<List<Question>> getListQuestion(int id) async {
+  try {
+    var response = await http.get(
+      Uri.parse("$urlGetQuestionHomeWork/$id"),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ${globals.accessToken}',
+      },
+    );
+    if (response.statusCode == 200) {
+      return parseQuestionList(response.body);
     } else {
       return [];
     }

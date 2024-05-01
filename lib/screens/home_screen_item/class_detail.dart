@@ -82,7 +82,7 @@ class _ClassDetailPageState extends State<ClassDetailPage> {
                             ),
                             Text("${classListDetail[0].schedule}"),
                             Text("${classListDetail[0].teacher!.name}"),
-                            Text("Lesson: ${index + 1}}"),
+                            Text("Lesson: ${index + 1}"),
                             Row(
                               children: [
                                 Text("Attendence Status: " +
