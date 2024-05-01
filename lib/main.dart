@@ -25,7 +25,7 @@ class _SchoolManagementState extends State<SchoolManagement> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home: LoginScreen(),
     );
   }
 }

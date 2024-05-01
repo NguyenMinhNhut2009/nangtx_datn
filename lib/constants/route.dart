@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
 
-const urlBase = 'https://9cbd-203-210-139-126.ngrok-free.app/api';
-const urlLogin = '$urlBase/login'; // api login
-const urlUser = '$urlBase/user'; // api get user
-const urlLogout = '$urlBase/user/logout'; // api logout
-const urlLesson = '$urlBase/user/lesson'; // api post lesson
+const urlBase = 'http://127.0.0.1:8000';
+const urlLogin = '$urlBase/api/login'; // api login
+const urlUser = '$urlBase/api/user'; // api get user
+const urlLogout = '$urlBase/api/user/logout'; // api logout
+const urlLesson = '$urlBase/api/class/lesson'; // api post lesson
 const urlLessonSelectedDate =
-    '$urlBase/user/lesson_schedule_task'; // api post lesson
-const urlTask = '$urlBase/user/task'; // api get
+    '$urlBase/api/class/lesson_schedule_task'; // api post lesson
+const urlTask = '$urlBase/api/class/task';
+// api get
+
+//api get class List
+const urlGetClassList = '$urlBase/api/class/list';
+
+//api getClassDetail
+
+const urlGetClassDetial = '$urlBase/api/class/detail';

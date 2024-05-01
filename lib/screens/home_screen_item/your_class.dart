@@ -1,3 +1,4 @@
+import 'package:datn_test/screens/login/login_api.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:datn_test/constants/ui_constants.dart';
@@ -5,46 +6,27 @@ import 'package:datn_test/constants/ui_constants.dart';
 import '../../model/class.dart';
 import '../../widgets/class_item.dart';
 
-class YourClass extends StatelessWidget {
+class YourClass extends StatefulWidget {
   YourClass({Key? key}) : super(key: key);
-  final List<Class> classes = [
-    Class(
-      id: 1,
-      name: 'Class reading tutorial 1',
-      teacher: 'Teacher 1',
-      sessions: 12,
-      schedule: '13:00 - 15:00 Mon, Wed, Fri',
-      imageUrl: 'assets/icons/read.png',
-      numberOfLessonsStudied: 5,
-    ),
-    Class(
-      id: 2,
-      name: 'Class speaking tutorial 1',
-      teacher: 'Teacher 2',
-      sessions: 12,
-      schedule: '13:00 - 15:00 Mon, Wed, Fri',
-      imageUrl: 'assets/icons/speak.png',
-      numberOfLessonsStudied: 6,
-    ),
-    Class(
-      id: 3,
-      name: 'Class writing tutorial 1',
-      teacher: 'Teacher 3',
-      sessions: 12,
-      schedule: '13:00 - 15:00 Mon, Wed, Fri',
-      imageUrl: 'assets/icons/write.png',
-      numberOfLessonsStudied: 6,
-    ),
-    Class(
-      id: 4,
-      name: 'Class listening tutorial 1',
-      teacher: 'Teacher 4',
-      sessions: 12,
-      schedule: '13:00 - 15:00 Mon, Wed, Fri',
-      imageUrl: 'assets/icons/listen.png',
-      numberOfLessonsStudied: 4,
-    ),
-  ];
+
+  @override
+  State<YourClass> createState() => _YourClassState();
+}
+
+class _YourClassState extends State<YourClass> {
+  List<ClassList> classList = [];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    loadData();
+  }
+
+  loadData() async {
+    classList = await getClassList() as List<ClassList>;
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,17 +40,21 @@ class YourClass extends StatelessWidget {
           },
         ),
       ),
-      body: Container(
-        child: ListView.builder(
-          itemCount: classes.length,
-          itemBuilder: (context, index) {
-            return ClassListItem(
-              classInfo: classes[index],
-              checkPage: true,
-            );
-          },
-        ),
-      ),
+      body: classList!.length == 0
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : Container(
+              child: ListView.builder(
+                itemCount: classList!.length,
+                itemBuilder: (context, index) {
+                  return ClassListItem(
+                    classInfo: classList![index],
+                    checkPage: true,
+                  );
+                },
+              ),
+            ),
     );
   }
 }

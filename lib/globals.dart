@@ -1,6 +1,7 @@
 library globals;
 
 import 'package:datn_test/model/homework.dart';
+import 'package:datn_test/model/user.dart';
 import 'package:flutter/material.dart';
 
 String accessToken = "";

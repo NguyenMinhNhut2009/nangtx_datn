@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../model/class.dart';
 
 class ClassListItem extends StatelessWidget {
-  final Class classInfo;
+  final ClassList classInfo;
   final bool checkPage;
 
   ClassListItem({required this.classInfo, required this.checkPage});
@@ -35,12 +35,12 @@ class ClassListItem extends StatelessWidget {
             ],
             image: DecorationImage(
               fit: BoxFit.cover,
-              image: AssetImage(classInfo.imageUrl),
+              image: AssetImage(classInfo.imageUrl ?? ''),
             ),
           ),
         ),
         title: Text(
-          classInfo.name,
+          classInfo.name!,
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 18.0,
@@ -61,7 +61,7 @@ class ClassListItem extends StatelessWidget {
                 SizedBox(
                   width: 5,
                 ),
-                Text(classInfo.teacher),
+                Text(classInfo.teacher!.name ?? ''),
               ],
             ),
             SizedBox(
@@ -77,24 +77,26 @@ class ClassListItem extends StatelessWidget {
                   width: 5,
                 ),
                 Text(
-                    "Lesson: ${classInfo.numberOfLessonsStudied}/${classInfo.sessions}"),
+                    "Lesson: ${classInfo.numberOfLessonsStudied}/${classInfo.lessons!.length}"),
               ],
             ),
             SizedBox(
               height: 5,
             ),
-            Row(
-              children: [
-                Icon(
-                  Icons.schedule_rounded,
-                  size: 16,
-                ),
-                SizedBox(
-                  width: 5,
-                ),
-                Text(classInfo.schedule),
-              ],
-            ),
+            classInfo.schedule == null
+                ? SizedBox()
+                : Row(
+                    children: [
+                      Icon(
+                        Icons.schedule_rounded,
+                        size: 16,
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text(classInfo.schedule ?? ''),
+                    ],
+                  ),
             SizedBox(
               height: 5,
             ),
@@ -111,7 +113,7 @@ class ClassListItem extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (context) => ClassDetailPage(
-                              classId: classInfo.id,
+                              classId: classInfo.id!,
                               checkPage: checkPage,
                             )));
               },
