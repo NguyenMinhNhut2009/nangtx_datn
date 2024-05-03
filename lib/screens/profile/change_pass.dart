@@ -1,5 +1,6 @@
 import 'package:datn_test/constants/constants.dart';
 import 'package:datn_test/screens/login/login_api.dart';
+import 'package:datn_test/screens/login/login_screen.dart';
 import 'package:flutter/material.dart';
 
 class ChanegPassWord extends StatefulWidget {
@@ -14,6 +15,8 @@ class _ChanegPassWordState extends State<ChanegPassWord> {
   TextEditingController newPassWordVC = TextEditingController(text: '');
   TextEditingController confirmNewPassWordVC = TextEditingController(text: '');
   bool _obscureText = true;
+  bool _obscureTextNewPass = true;
+  bool _obscureTextConfirmNewPass = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,22 +74,65 @@ class _ChanegPassWordState extends State<ChanegPassWord> {
                   height: 15,
                 ),
                 TextFormField(
-                  textAlign: TextAlign.start,
                   controller: newPassWordVC,
-                  cursorColor: Colors.black,
+                  obscureText: _obscureTextNewPass,
+                  cursorColor: kPrimaryColor,
                   decoration: InputDecoration(
-                    floatingLabelBehavior: FloatingLabelBehavior.never,
-                    alignLabelWithHint: true,
-                    labelText: 'Confirm new password',
-                    border: OutlineInputBorder(),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                          color: Colors.black), // Màu viền khi không focus
+                    icon: Icon(
+                      Icons.lock,
+                      color: kPrimaryColor,
                     ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(color: Colors.black), // Màu viền khi focus
+                    hintText: "Password",
+                    hintStyle: TextStyle(),
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        _obscureTextNewPass
+                            ? Icons.visibility
+                            : Icons.visibility_off,
+                        color: kPrimaryColor,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _obscureTextNewPass = !_obscureTextNewPass;
+                        });
+                      },
                     ),
+                    border: InputBorder.none,
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Text("Confirm new password"),
+                SizedBox(
+                  height: 15,
+                ),
+                TextFormField(
+                  controller: confirmNewPassWordVC,
+                  obscureText: _obscureTextConfirmNewPass,
+                  cursorColor: kPrimaryColor,
+                  decoration: InputDecoration(
+                    icon: Icon(
+                      Icons.lock,
+                      color: kPrimaryColor,
+                    ),
+                    hintText: "Confirm new password",
+                    hintStyle: TextStyle(),
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        _obscureTextConfirmNewPass
+                            ? Icons.visibility
+                            : Icons.visibility_off,
+                        color: kPrimaryColor,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _obscureTextConfirmNewPass =
+                              !_obscureTextConfirmNewPass;
+                        });
+                      },
+                    ),
+                    border: InputBorder.none,
                   ),
                 ),
                 SizedBox(
@@ -126,11 +172,29 @@ class _ChanegPassWordState extends State<ChanegPassWord> {
     //     ),
     //   );
     // }
+    if (newPassWordVC.text != confirmNewPassWordVC.text) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Confirmation password does not match"),
+        ),
+      );
+    }
 
     try {
-      // await postUserChangeInfo(nameVC.text, phoneNumberVC.text);
-      // await getUserInfor();
-      Navigator.pop(context);
+      final id = await postUserChangePass(
+          passWordVC.text, newPassWordVC.text, confirmNewPassWordVC.text);
+      if (id == 1) {
+        Navigator.pop(context);
+        // await Navigator.push(
+        //   context,
+        //   MaterialPageRoute(builder: (context) => LoginScreen()),
+        // );
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("Password change successful"),
+          ),
+        );
+      }
     } catch (e) {
       throw (e);
     }

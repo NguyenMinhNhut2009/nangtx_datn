@@ -128,7 +128,6 @@ class _EditProfileState extends State<EditProfile> {
       if (a == 1) {
         await getUserInfor();
       }
-
       if (widget.name != nameVC.text) {
         Navigator.pop(context, nameVC.text);
       }

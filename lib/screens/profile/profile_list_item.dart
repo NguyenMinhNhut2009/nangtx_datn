@@ -1,4 +1,5 @@
 import 'package:datn_test/screens/login/screens.dart';
+import 'package:datn_test/screens/profile/change_pass.dart';
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:datn_test/constants/constants.dart';
@@ -30,6 +31,12 @@ class _ProfileListItemState extends State<ProfileListItem> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
+        if (widget.onTap == true) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => ChanegPassWord()),
+          );
+        }
         var response = await http.get(
           Uri.parse(widget.apiUrl),
           headers: {

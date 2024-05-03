@@ -405,3 +405,30 @@ Future<int> postUserChangeInfo(String name, String PhoneNumber) async {
     throw (e);
   }
 }
+
+Future<int> postUserChangePass(
+    String oldPass, String newPass, String confirmNewPass) async {
+  try {
+    var url = Uri.parse(urlPostChangePass);
+    var headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ${globals.accessToken}',
+    };
+    var formData = http.MultipartRequest('POST', url);
+    formData.fields.addAll({
+      'password': oldPass,
+      'new_password': newPass,
+      'confirm_password': confirmNewPass,
+    });
+    formData.headers.addAll(headers);
+    var response = await formData.send();
+    if (response.statusCode == 200) {
+      return 1;
+    } else {
+      return 0;
+    }
+  } catch (e) {
+    throw (e);
+  }
+}

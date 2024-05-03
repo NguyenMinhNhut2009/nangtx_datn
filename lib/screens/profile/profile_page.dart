@@ -146,7 +146,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         onTap: false,
                       ),
                       ProfileListItem(
-                        icon: LineAwesomeIcons.cog,
+                        icon: LineAwesomeIcons.lock,
                         text: 'Change Password',
                         onTap: true,
                       ),
