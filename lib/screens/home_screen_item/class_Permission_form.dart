@@ -38,7 +38,6 @@ class _PermissionFormState extends State<PermissionForm> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     firstAndLastNameVC.dispose();
   }
@@ -68,6 +67,7 @@ class _PermissionFormState extends State<PermissionForm> {
                   height: 15,
                 ),
                 TextFormField(
+                  cursorColor: Colors.black,
                   // initialValue: firstAndLastNameVC.text,
                   readOnly: true,
                   enabled:
@@ -75,33 +75,12 @@ class _PermissionFormState extends State<PermissionForm> {
                   decoration: InputDecoration(
                       hintText: firstAndLastNameVC.text,
                       // labelText: firstAndLastNameVC.text,
+                      hintStyle: TextStyle(color: Colors.black),
                       border: OutlineInputBorder()),
                 ),
                 SizedBox(
                   height: 20,
                 ),
-                // Text("Subject Title"),
-                // SizedBox(
-                //   height: 15,
-                // ),
-                // GestureDetector(
-                //   onTap: () {
-                //     _showItemAndLessonBottomSheet(context);
-                //   },
-                //   child: TextFormField(
-                //     // initialValue: firstAndLastNameVC.text,
-                //     readOnly: true,
-                //     enabled:
-                //         false, // Đặt readOnly thành true để ngăn người dùng chỉnh sửa
-                //     decoration: InputDecoration(
-                //         hintText: nameOfSubjectVC.text,
-                //         // labelText: firstAndLastNameVC.text,
-                //         border: OutlineInputBorder()),
-                //   ),
-                // ),
-                // SizedBox(
-                //   height: 20,
-                // ),
                 Text("Name of the lesson"),
                 SizedBox(
                   height: 15,
@@ -110,15 +89,29 @@ class _PermissionFormState extends State<PermissionForm> {
                   onTap: () {
                     _showItemAndLessonBottomSheet(context);
                   },
-                  child: TextFormField(
-                    // initialValue: firstAndLastNameVC.text,
-                    readOnly: true,
-                    enabled:
-                        false, // Đặt readOnly thành true để ngăn người dùng chỉnh sửa
-                    decoration: InputDecoration(
-                        hintText: nameOfInstructorVC.text,
-                        // labelText: firstAndLastNameVC.text,
-                        border: OutlineInputBorder()),
+                  child: Stack(
+                    alignment: AlignmentDirectional.centerEnd,
+                    children: [
+                      TextFormField(
+                        cursorColor: Colors.black,
+                        readOnly: true,
+                        enabled: false,
+                        decoration: InputDecoration(
+                            hintStyle: TextStyle(color: Colors.black),
+                            hintText: nameOfInstructorVC.text,
+                            border: OutlineInputBorder()),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment
+                            .spaceBetween, // Căn các phần tử vào giữa
+                        crossAxisAlignment:
+                            CrossAxisAlignment.center, // Căn theo trục chính
+                        children: [
+                          Spacer(), // Dùng Spacer để đẩy Icon về phía bên phải
+                          Icon(Icons.arrow_drop_down),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
                 SizedBox(
@@ -180,26 +173,50 @@ class _PermissionFormState extends State<PermissionForm> {
             itemCount: leaveApplyList.length,
             itemBuilder: (context, index) {
               return GestureDetector(
-                onTap: () async {
-                  Navigator.pop(context);
-                  _showLessonsBottomSheet(context, leaveApplyList[index]);
-                  // setState(() {
-                  //   nameOfSubjectVC.text = leaveApplyList[index].name!;
-                  // });
-                },
-                child: Container(
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(18),
-                          topRight: Radius.circular(18),
-                        )),
-                    padding: EdgeInsets.all(12.0),
-                    child: Text(
-                      leaveApplyList[index].name!,
-                      style: TextStyle(fontSize: 15),
-                    )),
-              );
+                  onTap: () async {
+                    Navigator.pop(context);
+                    _showLessonsBottomSheet(context, leaveApplyList[index]);
+                  },
+                  child: Card(
+                    margin: EdgeInsets.all(16.0),
+                    elevation: 4.0, // Độ nâng của Card
+                    child: ListTile(
+                      contentPadding: EdgeInsets.only(
+                          right: 16.0,
+                          left: 16.0,
+                          top: 10,
+                          bottom: 10), // Padding của ListTile
+
+                      title: Text(
+                        leaveApplyList[index].name ?? '',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18.0,
+                        ),
+                      ),
+                      subtitle: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Text(leaveApplyList[index].teacher!.name ?? ''),
+                          ]),
+                    ),
+                  )
+                  //  Container(
+                  //     decoration: BoxDecoration(
+                  //         color: Colors.white,
+                  //         borderRadius: BorderRadius.only(
+                  //           topLeft: Radius.circular(18),
+                  //           topRight: Radius.circular(18),
+                  //         )),
+                  //     padding: EdgeInsets.all(12.0),
+                  //     child: Text(
+                  //       leaveApplyList[index].name!,
+                  //       style: TextStyle(fontSize: 15),
+                  //     )),
+                  );
             });
       },
     );
@@ -216,8 +233,7 @@ class _PermissionFormState extends State<PermissionForm> {
             itemCount: lessons.length,
             itemBuilder: (context, index) {
               final lesson = lessons[index];
-              return ListTile(
-                title: Text(lesson.lessonName!),
+              return GestureDetector(
                 onTap: () {
                   setState(() {
                     nameOfInstructorVC.text = lesson.lessonName!;
@@ -226,6 +242,25 @@ class _PermissionFormState extends State<PermissionForm> {
                   print("lesson abc $id");
                   Navigator.pop(context, lesson.id);
                 },
+                child: Card(
+                  margin: EdgeInsets.all(16.0),
+                  elevation: 4.0, // Độ nâng của Card
+                  child: ListTile(
+                    contentPadding: EdgeInsets.only(
+                        right: 16.0,
+                        left: 16.0,
+                        top: 10,
+                        bottom: 10), // Padding của ListTile
+
+                    title: Text(
+                      lesson.lessonName! ?? '',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18.0,
+                      ),
+                    ),
+                  ),
+                ),
               );
             },
           ),

@@ -52,71 +52,50 @@ class _ClassDetailPageState extends State<ClassDetailPage> {
             body: ListView.builder(
                 itemCount: lessons.length,
                 itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onTap: () {
-                      if (widget.checkPage == false) {
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (context) => PermissionForm(
-                        //               classInfo: classListDetail[index],
-                        //             )));
-                      }
-                    },
-                    child: Card(
+                  return Card(
+                    margin: EdgeInsets.all(8.0),
+                    elevation: 4.0,
+                    child: Container(
                       margin: EdgeInsets.all(8.0),
-                      elevation: 4.0,
-                      child: Container(
-                        margin: EdgeInsets.all(8.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "${lessons[index].lessonName}",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18.0,
-                              ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "${lessons[index].lessonName}",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18.0,
                             ),
-                            Text("${classListDetail[0].schedule}"),
-                            Text("${classListDetail[0].teacher!.name}"),
-                            Text("Lesson: ${index + 1}"),
-                            Row(
-                              children: [
-                                Text("Attendence Status: " +
-                                    "${lessons[index].attendenceStatus != null ? lessons[index].attendenceStatus : "None"}"),
-                              ],
-                            ),
-                            widget.checkPage == true
-                                ? lessons[index].documents!.length != 0
-                                    ? GestureDetector(
-                                        onTap: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    PdfViewController(
-                                                      url:
-                                                          'https://cdn.syncfusion.com/content/PDFViewer/flutter-succinctly.pdf',
-                                                      title:
-                                                          '${lessons[index].documents![0].name}',
-                                                    )),
-                                          );
-                                        },
-                                        child: Text(
-                                          "Documents After Class",
-                                          style: TextStyle(
-                                            decoration: TextDecoration
-                                                .underline, // Thêm gạch chân
-                                            decorationColor: Colors
-                                                .blue, // Màu của gạch chân
-                                            decorationThickness:
-                                                2, // Độ dày của gạch chân
-                                          ),
-                                        ),
-                                      )
-                                    : Text(
+                          ),
+                          classListDetail[0].schedule == null
+                              ? SizedBox()
+                              : Text("${classListDetail[0].schedule}"),
+                          Text("${classListDetail[0].teacher!.name}"),
+                          Text("Lesson: ${index + 1}"),
+                          Row(
+                            children: [
+                              Text("Attendence Status: " +
+                                  "${lessons[index].attendenceStatus != null ? lessons[index].attendenceStatus : "None"}"),
+                            ],
+                          ),
+                          widget.checkPage == true
+                              ? lessons[index].documents!.length != 0
+                                  ? GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  PdfViewController(
+                                                    url:
+                                                        'https://cdn.syncfusion.com/content/PDFViewer/flutter-succinctly.pdf',
+                                                    title:
+                                                        '${lessons[index].documents![0].name}',
+                                                  )),
+                                        );
+                                      },
+                                      child: Text(
                                         "Documents After Class",
                                         style: TextStyle(
                                           decoration: TextDecoration
@@ -126,10 +105,21 @@ class _ClassDetailPageState extends State<ClassDetailPage> {
                                           decorationThickness:
                                               2, // Độ dày của gạch chân
                                         ),
-                                      )
-                                : SizedBox(),
-                          ],
-                        ),
+                                      ),
+                                    )
+                                  : Text(
+                                      "Documents After Class",
+                                      style: TextStyle(
+                                        decoration: TextDecoration
+                                            .underline, // Thêm gạch chân
+                                        decorationColor:
+                                            Colors.blue, // Màu của gạch chân
+                                        decorationThickness:
+                                            2, // Độ dày của gạch chân
+                                      ),
+                                    )
+                              : SizedBox(),
+                        ],
                       ),
                     ),
                   );

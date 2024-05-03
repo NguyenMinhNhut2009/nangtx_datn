@@ -92,7 +92,7 @@ class HomeworkListItem extends StatelessWidget {
                             )));
               },
               child: Ink(
-                padding: EdgeInsets.all(10),
+                padding: EdgeInsets.all(5),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: Colors.blue.withOpacity(0.1), // Màu nền khi hover

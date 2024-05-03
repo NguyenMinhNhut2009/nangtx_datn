@@ -155,7 +155,7 @@ class _HomePageState extends State<HomePage> {
                       SizedBox(
                         height: 20,
                       ),
-                      buildTitleRow("YOUR FUNCTIONS", 5),
+                      buildTitleRow("YOUR FUNCTIONS", 4),
                       SizedBox(
                         height: 20,
                       ),

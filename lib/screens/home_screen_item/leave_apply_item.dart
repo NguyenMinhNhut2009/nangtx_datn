@@ -8,7 +8,7 @@ class LeaveApplyItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.all(8.0),
+      margin: EdgeInsets.all(16.0),
       elevation: 4.0, // Độ nâng của Card
       child: ListTile(
         contentPadding: EdgeInsets.only(

@@ -31,19 +31,16 @@ class _ChanegPassWordState extends State<ChanegPassWord> {
         ),
       ),
       body: Container(
-        padding: const EdgeInsets.all(8.0),
         width: double.infinity,
         child: Column(
           children: [
             Expanded(
               child: ListView(
-                // mainAxisAlignment: MainAxisAlignment.start,
-                // crossAxisAlignment: CrossAxisAlignment.start,
                 padding: EdgeInsets.all(8.0),
                 children: [
                   Text("Enter your old password"),
                   SizedBox(
-                    height: 15,
+                    height: 5,
                   ),
                   TextFieldContainer(
                     child: TextFormField(
@@ -79,7 +76,7 @@ class _ChanegPassWordState extends State<ChanegPassWord> {
                   ),
                   Text("Enter your new password"),
                   SizedBox(
-                    height: 15,
+                    height: 5,
                   ),
                   TextFieldContainer(
                     child: TextFormField(
@@ -115,7 +112,7 @@ class _ChanegPassWordState extends State<ChanegPassWord> {
                   ),
                   Text("Confirm new password"),
                   SizedBox(
-                    height: 15,
+                    height: 5,
                   ),
                   TextFieldContainer(
                     child: TextFormField(

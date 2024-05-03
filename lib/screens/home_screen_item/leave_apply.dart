@@ -34,7 +34,7 @@ class _LeaveApplyState extends State<LeaveApply> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Leave Aplly'),
+        title: Text('Leave Apply'),
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
