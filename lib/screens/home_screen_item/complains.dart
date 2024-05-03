@@ -1,10 +1,6 @@
-import 'package:datn_test/model/chat_user.dart';
 import 'package:datn_test/model/teacher.dart';
-import 'package:datn_test/screens/home_screen_item/complain_detail.dart';
 import 'package:datn_test/screens/login/login_api.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:datn_test/constants/ui_constants.dart';
 
 class Complaints extends StatefulWidget {
   const Complaints({Key? key}) : super(key: key);
@@ -81,8 +77,6 @@ class _ComplaintsState extends State<Complaints> {
                               ),
                               Text(
                                 teacherlist[index].phone ?? '',
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
                               ),
                             ],
                           ),
@@ -103,10 +97,6 @@ class _ComplaintsState extends State<Complaints> {
                               ),
                               Text(
                                 teacherlist[index].email ?? '',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18.0,
-                                ),
                               ),
                             ],
                           ),

@@ -2,7 +2,7 @@ import 'package:datn_test/model/asignment.dart';
 import 'package:datn_test/screens/home_screen_item/results.dart';
 import 'package:datn_test/screens/login/login_api.dart';
 import 'package:flutter/material.dart';
-import 'package:timer_count_down/timer_controller.dart';
+import 'package:datn_test/globals.dart' as globals;
 
 class YourAssignemt extends StatefulWidget {
   final int id;
@@ -44,7 +44,7 @@ class _YourAssignemtState extends State<YourAssignemt> {
 
   @override
   Widget build(BuildContext context) {
-    void check(var opt) {
+    void check(var opt) async {
       if (index == asignment.length - 1) {
         if (asignment[index].answer == asignment[index].question![opt]) {
           score += 1;
@@ -54,32 +54,24 @@ class _YourAssignemtState extends State<YourAssignemt> {
         }
         add_answers(answer);
 
-        // if (GetStorage().read("TotalScore") == null) {
-        //   GetStorage().write("TotalScore", score);
-        // } else {
-        //   int ts = GetStorage().read("TotalScore") + score;
-        //   GetStorage().write("TotalScore", ts);
-        // }
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-              builder: (context) => ResultsScreen(score, asignment.length)),
-        );
+        postHomeWorkResultStore(globals.userId.toString(), widget.id.toString(),
+            score.toString(), asignment.length.toString());
+        Navigator.pop(context);
+        // Navigator.pushReplacement(
+        //   context,
+        //   MaterialPageRoute(
+        //       builder: (context) => ResultsScreen(score, asignment.length)),
+        // );
       } else {
         if (asignment[index].answer == asignment[index].option![opt]) {
           score += 1;
           answer = true;
         } else {
-          // if (score > 0) {
-          //   score -= 5;
-          // }
           answer = false;
         }
         add_answers(answer);
-
         setState(() {
           index += 1;
-          // _controller.restart();
         });
       }
     }
@@ -101,9 +93,6 @@ class _YourAssignemtState extends State<YourAssignemt> {
           : Container(
               width: double.infinity,
               height: double.infinity,
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage("assets/bg.png"), fit: BoxFit.cover)),
               child: Expanded(
                 child: Container(
                   margin: EdgeInsets.all(10),

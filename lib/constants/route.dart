@@ -36,3 +36,13 @@ const urlPostStoreAttendance = '$urlBase/api/attendance/store';
 
 //api get teacher list
 const urlGetTeacherList = '$urlBase/api/teacher/lists';
+
+//api post homework result store
+
+const urlPostHomeWorkResultStore = '$urlBase/api/homework/result/store';
+
+// api post change-info
+const urlPostChangeInfor = '$urlBase/api/user/change-info';
+
+// api post change pass
+const urlPostChangePass = '$urlBase/api/user/change-pass';

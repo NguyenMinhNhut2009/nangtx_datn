@@ -56,7 +56,6 @@ class ResultsScreen extends StatelessWidget {
                         SizedBox(
                           height: 20,
                         ),
-                        Text('Number of sentences correct: $roundedNumber'),
                       ],
                     ),
                   ),
@@ -65,8 +64,6 @@ class ResultsScreen extends StatelessWidget {
               GestureDetector(
                   onTap: () {
                     Navigator.of(context).pop();
-                    // Navigator.of(context).push(
-                    //     MaterialPageRoute(builder: (context) => HomePage()));
                   },
                   child: Container(
                     color: Colors.red,

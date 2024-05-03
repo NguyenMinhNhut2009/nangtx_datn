@@ -1,12 +1,19 @@
 import 'package:animated_theme_switcher/animated_theme_switcher.dart';
 import 'package:datn_test/constants/route.dart';
+import 'package:datn_test/screens/profile/edit_profile.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:datn_test/constants/constants.dart';
 import 'package:datn_test/screens/profile/profile_list_item.dart';
 import 'package:datn_test/globals.dart' as globals;
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     var profileInfo = Expanded(
@@ -62,20 +69,33 @@ class ProfilePage extends StatelessWidget {
             ),
           ),
           SizedBox(height: kSpacingUnit * 2),
-          Container(
-            height: kSpacingUnit * 4,
-            width: kSpacingUnit * 20,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(kSpacingUnit * 3),
-              color: Color(0xFFFFC107),
-            ),
-            child: Center(
-              child: Text(
-                'Edit profile',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                  color: kDarkPrimaryColor,
+          GestureDetector(
+            onTap: () async {
+              Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => EditProfile(name: globals.fullName)))
+                  .then((value) {
+                setState(() {
+                  globals.fullName = value ?? '';
+                });
+              });
+            },
+            child: Container(
+              height: kSpacingUnit * 4,
+              width: kSpacingUnit * 20,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(kSpacingUnit * 3),
+                color: Color(0xFFFFC107),
+              ),
+              child: Center(
+                child: Text(
+                  'Edit profile',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                    color: kDarkPrimaryColor,
+                  ),
                 ),
               ),
             ),
@@ -108,24 +128,34 @@ class ProfilePage extends StatelessWidget {
                       ProfileListItem(
                         icon: LineAwesomeIcons.user_shield,
                         text: 'Privacy',
+                        onTap: false,
                       ),
                       ProfileListItem(
                         icon: LineAwesomeIcons.history,
                         text: 'Purchase History',
+                        onTap: false,
                       ),
                       ProfileListItem(
                         icon: LineAwesomeIcons.question_circle,
                         text: 'Help & Support',
+                        onTap: false,
                       ),
                       ProfileListItem(
                         icon: LineAwesomeIcons.cog,
                         text: 'Settings',
+                        onTap: false,
+                      ),
+                      ProfileListItem(
+                        icon: LineAwesomeIcons.cog,
+                        text: 'Change Password',
+                        onTap: true,
                       ),
                       ProfileListItem(
                         icon: LineAwesomeIcons.alternate_sign_out,
                         text: 'Logout',
                         hasNavigation: false,
                         apiUrl: urlLogout,
+                        onTap: false,
                       ),
                     ],
                   ),

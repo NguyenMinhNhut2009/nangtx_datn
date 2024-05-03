@@ -35,65 +35,48 @@ Future<void> validateAndSubmit(
       globals.tokenType = jsonResponse["type_token"];
 
       print('token: $jsonResponse["access_token"]');
-      // //get user
-      // response = await http.get(
-      //   Uri.parse(urlUser),
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //     'Accept': 'application/json',
-      //     'Authorization': 'Bearer ${globals.accessToken}',
-      //   },
-      // );
-      // jsonResponse = jsonDecode(response.body) as Map<String, dynamic>;
 
-      // if (response.statusCode == 200) {
-      //   if (jsonResponse != null && jsonResponse.containsKey('data')) {
-      //     globals.fullName = jsonResponse['data']['name'];
-      //     globals.email = jsonResponse['data']['email'];
-      //   }
-      // }
+      // get lesson data today
+      response = await http.post(
+        Uri.parse(urlLesson),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ${globals.accessToken}',
+        },
+        body: jsonEncode(<String, String>{
+          'type': '1',
+        }),
+      );
 
-      // // get lesson data today
-      // response = await http.post(
-      //   Uri.parse(urlLesson),
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //     'Accept': 'application/json',
-      //     'Authorization': 'Bearer ${globals.accessToken}',
-      //   },
-      //   body: jsonEncode(<String, String>{
-      //     'type': '1',
-      //   }),
-      // );
+      if (response.statusCode == 200) {
+        lessonData = jsonDecode(response.body)['data'];
+        for (int i = 0; i < lessonData.length; i++) {
+          for (var j = 0; j < lessonData[i]['lessons'].length; j++) {
+            lessonHomes.add(buildClassItem(
+                context,
+                DateTime.parse(lessonData[i]['lessons'][j]['start_time'])
+                        .hour
+                        .toString() +
+                    ":" +
+                    DateTime.parse(lessonData[i]['lessons'][j]['start_time'])
+                        .minute
+                        .toString(),
+                DateTime.parse(lessonData[i]['lessons'][j]['start_time']).hour <
+                    12,
+                lessonData[i]['name'] +
+                    " (" +
+                    lessonData[i]['lessons'][j]['lesson_name'] +
+                    ")",
+                lessonData[i]['room']['name'] + address,
+                lessonData[i]['teacher']['first_name'] +
+                    " " +
+                    lessonData[i]['teacher']['last_name']));
+          }
+        }
+      }
 
-      // if (response.statusCode == 200) {
-      //   lessonData = jsonDecode(response.body)['data'];
-      //   for (int i = 0; i < lessonData.length; i++) {
-      //     for (var j = 0; j < lessonData[i]['lessons'].length; j++) {
-      //       lessonHomes.add(buildClassItem(
-      //           context,
-      //           DateTime.parse(lessonData[i]['lessons'][j]['start_time'])
-      //                   .hour
-      //                   .toString() +
-      //               ":" +
-      //               DateTime.parse(lessonData[i]['lessons'][j]['start_time'])
-      //                   .minute
-      //                   .toString(),
-      //           DateTime.parse(lessonData[i]['lessons'][j]['start_time']).hour <
-      //               12,
-      //           lessonData[i]['name'] +
-      //               " (" +
-      //               lessonData[i]['lessons'][j]['lesson_name'] +
-      //               ")",
-      //           lessonData[i]['room']['name'] + address,
-      //           lessonData[i]['teacher']['first_name'] +
-      //               " " +
-      //               lessonData[i]['teacher']['last_name']));
-      //     }
-      //   }
-      // }
-
-      // // Get task today
+      //Get task today
       // response = await http.get(
       //   Uri.parse(urlTask),
       //   headers: {
@@ -103,51 +86,52 @@ Future<void> validateAndSubmit(
       //   },
       // );
 
-      // if (response.statusCode == 200) {
-      //   taskData = jsonDecode(response.body)['data'];
-      //   for (int i = 0; i < taskData.length; i++) {
-      //     for (var j = 0; j < taskData[i]['homeworks'].length; j++) {
-      //       taskItems.add(buildTaskItem(
-      //           "Homework",
-      //           getTimeLeft(taskData[i]['homeworks'][j]['start_time']),
-      //           taskData[i]['name'],
-      //           taskData[i]['homeworks'][j]['homework_name'],
-      //           getColorLeft(taskData[i]['homeworks'][j]['start_time']),
-      //           true));
-      //       homeworks.add(Homework(
-      //         assignmentName: taskData[i]['homeworks'][j]['homework_name'],
-      //         teacher: taskData[i]['teacher']['first_name'] +
-      //             " " +
-      //             taskData[i]['teacher']['last_name'],
-      //         nameClass: taskData[i]['name'],
-      //         dueDate: taskData[i]['homeworks'][j]['end_time'],
-      //         time: "1 hour",
-      //         imageUrl: getUrlImageClass(taskData[i]['type']),
-      //       ));
-      //     }
-      //     for (var j = 0; j < taskData[i]['exams'].length; j++) {
-      //       taskItems.add(buildTaskItem(
-      //         "Exam",
-      //         getTimeLeft(taskData[i]['exams'][j]['start_time']),
-      //         taskData[i]['name'],
-      //         taskData[i]['exams'][j]['exam_name'],
-      //         getColorLeft(taskData[i]['exams'][j]['start_time']),
-      //         false,
-      //       ));
+      if (response.statusCode == 200) {
+        taskData = jsonDecode(response.body)['data'];
+        print(taskData.length);
+        for (int i = 0; i < taskData.length; i++) {
+          for (var j = 0; j < taskData[i]['homeworks'].length; j++) {
+            taskItems.add(buildTaskItem(
+                "Homework",
+                getTimeLeft(taskData[i]['homeworks'][j]['start_time']),
+                taskData[i]['name'],
+                taskData[i]['homeworks'][j]['homework_name'],
+                getColorLeft(taskData[i]['homeworks'][j]['start_time']),
+                true));
+            homeworks.add(Homework(
+              assignmentName: taskData[i]['homeworks'][j]['homework_name'],
+              teacher: taskData[i]['teacher']['first_name'] +
+                  " " +
+                  taskData[i]['teacher']['last_name'],
+              nameClass: taskData[i]['name'],
+              dueDate: taskData[i]['homeworks'][j]['end_time'],
+              time: "1 hour",
+              imageUrl: getUrlImageClass(taskData[i]['type']),
+            ));
+          }
+          // for (var j = 0; j < taskData[i]['exams'].length; j++) {
+          //   taskItems.add(buildTaskItem(
+          //     "Exam",
+          //     getTimeLeft(taskData[i]['exams'][j]['start_time']),
+          //     taskData[i]['name'],
+          //     taskData[i]['exams'][j]['exam_name'],
+          //     getColorLeft(taskData[i]['exams'][j]['start_time']),
+          //     false,
+          //   ));
 
-      //       exams.add(Homework(
-      //         assignmentName: taskData[i]['exams'][j]['exam_name'],
-      //         teacher: taskData[i]['teacher']['first_name'] +
-      //             " " +
-      //             taskData[i]['teacher']['last_name'],
-      //         nameClass: taskData[i]['name'],
-      //         dueDate: taskData[i]['exams'][j]['end_time'],
-      //         time: "1 hour",
-      //         imageUrl: getUrlImageClass(taskData[i]['type']),
-      //       ));
-      //     }
-      //   }
-      // }
+          //   exams.add(Homework(
+          //     assignmentName: taskData[i]['exams'][j]['exam_name'],
+          //     teacher: taskData[i]['teacher']['first_name'] +
+          //         " " +
+          //         taskData[i]['teacher']['last_name'],
+          //     nameClass: taskData[i]['name'],
+          //     dueDate: taskData[i]['exams'][j]['end_time'],
+          //     time: "1 hour",
+          //     imageUrl: getUrlImageClass(taskData[i]['type']),
+          //   ));
+          // }
+        }
+      }
 
       await Navigator.push(
         context,
@@ -186,6 +170,9 @@ Future<User?> getUserInfor() async {
       var data = User.fromJson(jsonDecode(response.body)["data"]);
       globals.userId = data.id!;
       globals.fullName = data.name!;
+      globals.email = data.email!;
+      globals.phoneNumber = data.phoneNumber!;
+
       return data;
     } else {
       return null;
@@ -321,14 +308,19 @@ Future<bool> postAttendanceStore(
     String studentId, String lessonId, String reason) async {
   try {
     var url = Uri.parse(urlPostStoreAttendance);
-
+    var headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ${globals.accessToken}',
+    };
     var formData = http.MultipartRequest('POST', url);
     formData.fields.addAll(
         {'student_id': studentId, 'lesson_id': lessonId, 'reason': reason});
 
+    formData.headers.addAll(headers);
     var response = await formData.send();
     print(response);
-    if (response.statusCode == 200) {
+    if (response.statusCode == 201) {
       return true;
     } else {
       return false;
@@ -352,6 +344,62 @@ Future<List<TeacherList>> getTeacherList() async {
       return parseTeacherList(response.body);
     } else {
       return [];
+    }
+  } catch (e) {
+    throw (e);
+  }
+}
+
+Future<bool> postHomeWorkResultStore(String studentId, String homeworkId,
+    String countCorrect, String countQuestion) async {
+  try {
+    var url = Uri.parse(urlPostHomeWorkResultStore);
+    var headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ${globals.accessToken}',
+    };
+    var formData = http.MultipartRequest('POST', url);
+    formData.fields.addAll({
+      'student_id': studentId,
+      'homework_id': homeworkId,
+      'count_correct': countCorrect,
+      'count_question': countQuestion
+    });
+
+    formData.headers.addAll(headers);
+    var response = await formData.send();
+    print(response);
+    print(response);
+    if (response.statusCode == 201) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (e) {
+    throw (e);
+  }
+}
+
+Future<int> postUserChangeInfo(String name, String PhoneNumber) async {
+  try {
+    var url = Uri.parse(urlPostChangeInfor);
+    var headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ${globals.accessToken}',
+    };
+    var formData = http.MultipartRequest('POST', url);
+    formData.fields.addAll({
+      'name': name,
+      'phone_number': PhoneNumber,
+    });
+    formData.headers.addAll(headers);
+    var response = await formData.send();
+    if (response.statusCode == 200) {
+      return 1;
+    } else {
+      return 0;
     }
   } catch (e) {
     throw (e);

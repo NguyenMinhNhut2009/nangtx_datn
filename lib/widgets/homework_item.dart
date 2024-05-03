@@ -20,25 +20,6 @@ class HomeworkListItem extends StatelessWidget {
             left: 16.0,
             top: 10,
             bottom: 10), // Padding của ListTile
-        leading: Container(
-          width: 40,
-          height: 40,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(50),
-            border: Border.all(width: 1, color: Colors.white),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.blueGrey.withOpacity(0.2),
-                blurRadius: 12,
-                spreadRadius: 8,
-              )
-            ],
-            // image: DecorationImage(
-            //   fit: BoxFit.cover,
-            //   image: AssetImage(hwInfo.!),
-            // ),
-          ),
-        ),
         title: Text(
           hwInfo.assignmentName!,
           style: TextStyle(

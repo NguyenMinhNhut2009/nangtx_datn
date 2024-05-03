@@ -10,14 +10,16 @@ class ProfileListItem extends StatefulWidget {
   final String text;
   final bool hasNavigation;
   final String apiUrl;
+  final bool onTap;
 
-  const ProfileListItem({
-    Key? key,
-    required this.icon,
-    required this.text,
-    this.hasNavigation = true,
-    this.apiUrl = "",
-  }) : super(key: key);
+  const ProfileListItem(
+      {Key? key,
+      required this.icon,
+      required this.text,
+      this.hasNavigation = true,
+      this.apiUrl = "",
+      required this.onTap})
+      : super(key: key);
 
   @override
   _ProfileListItemState createState() => _ProfileListItemState();

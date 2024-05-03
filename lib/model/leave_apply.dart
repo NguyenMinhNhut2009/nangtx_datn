@@ -27,8 +27,8 @@ class LeaveApplyModel {
     reason = json['reason'];
     status = json['status'];
     lessonName = json['lesson_name'];
-    classroom = json['classroom'] != null
-        ? new Classroom.fromJson(json['classroom'])
+    classroom = json['class_name'] != null
+        ? new Classroom.fromJson(json['class_name'])
         : null;
     lesson =
         json['lesson'] != null ? new Lesson.fromJson(json['lesson']) : null;
@@ -43,7 +43,7 @@ class LeaveApplyModel {
     data['status'] = this.status;
     data['lesson_name'] = this.lessonName;
     if (this.classroom != null) {
-      data['classroom'] = this.classroom!.toJson();
+      data['class_name'] = this.classroom!.toJson();
     }
     if (this.lesson != null) {
       data['lesson'] = this.lesson!.toJson();

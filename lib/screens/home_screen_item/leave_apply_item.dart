@@ -18,7 +18,7 @@ class LeaveApplyItem extends StatelessWidget {
             bottom: 10), // Padding của ListTile
 
         title: Text(
-          data.classroom!.name!,
+          data.classroom!.name ?? '',
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 18.0,
@@ -34,7 +34,7 @@ class LeaveApplyItem extends StatelessWidget {
             SizedBox(
               height: 5,
             ),
-            Text(data.reason!),
+            Text(data.reason ?? ''),
           ],
         ),
       ),
