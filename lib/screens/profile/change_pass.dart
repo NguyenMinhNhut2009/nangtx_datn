@@ -1,6 +1,7 @@
 import 'package:datn_test/constants/constants.dart';
 import 'package:datn_test/screens/login/login_api.dart';
 import 'package:datn_test/screens/login/login_screen.dart';
+import 'package:datn_test/widgets/text_field_container.dart';
 import 'package:flutter/material.dart';
 
 class ChanegPassWord extends StatefulWidget {
@@ -29,136 +30,148 @@ class _ChanegPassWordState extends State<ChanegPassWord> {
           },
         ),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView(
-              // mainAxisAlignment: MainAxisAlignment.start,
-              // crossAxisAlignment: CrossAxisAlignment.start,
-              padding: EdgeInsets.all(8.0),
-              children: [
-                Text("Enter your old password"),
-                SizedBox(
-                  height: 15,
-                ),
-                TextFormField(
-                  controller: passWordVC,
-                  obscureText: _obscureText,
-                  cursorColor: kPrimaryColor,
-                  decoration: InputDecoration(
-                    icon: Icon(
-                      Icons.lock,
-                      color: kPrimaryColor,
-                    ),
-                    hintText: "Password",
-                    hintStyle: TextStyle(),
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        _obscureText ? Icons.visibility : Icons.visibility_off,
-                        color: kPrimaryColor,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          _obscureText = !_obscureText;
-                        });
-                      },
-                    ),
-                    border: InputBorder.none,
+      body: Container(
+        padding: const EdgeInsets.all(8.0),
+        width: double.infinity,
+        child: Column(
+          children: [
+            Expanded(
+              child: ListView(
+                // mainAxisAlignment: MainAxisAlignment.start,
+                // crossAxisAlignment: CrossAxisAlignment.start,
+                padding: EdgeInsets.all(8.0),
+                children: [
+                  Text("Enter your old password"),
+                  SizedBox(
+                    height: 15,
                   ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Text("Enter your new password"),
-                SizedBox(
-                  height: 15,
-                ),
-                TextFormField(
-                  controller: newPassWordVC,
-                  obscureText: _obscureTextNewPass,
-                  cursorColor: kPrimaryColor,
-                  decoration: InputDecoration(
-                    icon: Icon(
-                      Icons.lock,
-                      color: kPrimaryColor,
-                    ),
-                    hintText: "Password",
-                    hintStyle: TextStyle(),
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        _obscureTextNewPass
-                            ? Icons.visibility
-                            : Icons.visibility_off,
-                        color: kPrimaryColor,
+                  TextFieldContainer(
+                    child: TextFormField(
+                      controller: passWordVC,
+                      obscureText: _obscureText,
+                      cursorColor: kPrimaryColor,
+                      decoration: InputDecoration(
+                        icon: Icon(
+                          Icons.lock,
+                          color: kPrimaryColor,
+                        ),
+                        hintText: "Password",
+                        hintStyle: TextStyle(),
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            _obscureText
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                            color: kPrimaryColor,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _obscureText = !_obscureText;
+                            });
+                          },
+                        ),
+                        border: InputBorder.none,
                       ),
-                      onPressed: () {
-                        setState(() {
-                          _obscureTextNewPass = !_obscureTextNewPass;
-                        });
-                      },
                     ),
-                    border: InputBorder.none,
                   ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Text("Confirm new password"),
-                SizedBox(
-                  height: 15,
-                ),
-                TextFormField(
-                  controller: confirmNewPassWordVC,
-                  obscureText: _obscureTextConfirmNewPass,
-                  cursorColor: kPrimaryColor,
-                  decoration: InputDecoration(
-                    icon: Icon(
-                      Icons.lock,
-                      color: kPrimaryColor,
-                    ),
-                    hintText: "Confirm new password",
-                    hintStyle: TextStyle(),
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        _obscureTextConfirmNewPass
-                            ? Icons.visibility
-                            : Icons.visibility_off,
-                        color: kPrimaryColor,
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Text("Enter your new password"),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  TextFieldContainer(
+                    child: TextFormField(
+                      controller: newPassWordVC,
+                      obscureText: _obscureTextNewPass,
+                      cursorColor: kPrimaryColor,
+                      decoration: InputDecoration(
+                        icon: Icon(
+                          Icons.lock,
+                          color: kPrimaryColor,
+                        ),
+                        hintText: "Password",
+                        hintStyle: TextStyle(),
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            _obscureTextNewPass
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                            color: kPrimaryColor,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _obscureTextNewPass = !_obscureTextNewPass;
+                            });
+                          },
+                        ),
+                        border: InputBorder.none,
                       ),
-                      onPressed: () {
-                        setState(() {
-                          _obscureTextConfirmNewPass =
-                              !_obscureTextConfirmNewPass;
-                        });
-                      },
                     ),
-                    border: InputBorder.none,
                   ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-              ],
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Text("Confirm new password"),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  TextFieldContainer(
+                    child: TextFormField(
+                      controller: confirmNewPassWordVC,
+                      obscureText: _obscureTextConfirmNewPass,
+                      cursorColor: kPrimaryColor,
+                      decoration: InputDecoration(
+                        icon: Icon(
+                          Icons.lock,
+                          color: kPrimaryColor,
+                        ),
+                        hintText: "Confirm new password",
+                        hintStyle: TextStyle(),
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            _obscureTextConfirmNewPass
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                            color: kPrimaryColor,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _obscureTextConfirmNewPass =
+                                  !_obscureTextConfirmNewPass;
+                            });
+                          },
+                        ),
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                ],
+              ),
             ),
-          ),
-          SafeArea(
-              child: GestureDetector(
-            onTap: () {
-              update();
-            },
-            child: Container(
-              margin: EdgeInsets.all(8.0),
-              color: Colors.blue,
-              width: MediaQuery.of(context).size.width,
-              height: 50,
-              child: Center(
-                  child: Text(
-                "Update",
-                style: TextStyle(color: Colors.white),
-              )),
-            ),
-          ))
-        ],
+            SafeArea(
+                child: GestureDetector(
+              onTap: () {
+                update();
+              },
+              child: Container(
+                margin: EdgeInsets.all(8.0),
+                color: Colors.blue,
+                width: MediaQuery.of(context).size.width,
+                height: 50,
+                child: Center(
+                    child: Text(
+                  "Update",
+                  style: TextStyle(color: Colors.white),
+                )),
+              ),
+            ))
+          ],
+        ),
       ),
     );
   }
