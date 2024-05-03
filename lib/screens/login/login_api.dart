@@ -37,20 +37,17 @@ Future<void> validateAndSubmit(
       print('token: $jsonResponse["access_token"]');
 
       // get lesson data today
-      response = await http.post(
+      response = await http.get(
         Uri.parse(urlLesson),
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
           'Authorization': 'Bearer ${globals.accessToken}',
         },
-        body: jsonEncode(<String, String>{
-          'type': '1',
-        }),
       );
 
       if (response.statusCode == 200) {
-        lessonData = jsonDecode(response.body)['data'];
+        lessonData = jsonDecode(response.body);
         for (int i = 0; i < lessonData.length; i++) {
           for (var j = 0; j < lessonData[i]['lessons'].length; j++) {
             lessonHomes.add(buildClassItem(
@@ -68,45 +65,42 @@ Future<void> validateAndSubmit(
                     " (" +
                     lessonData[i]['lessons'][j]['lesson_name'] +
                     ")",
-                lessonData[i]['room']['name'] + address,
-                lessonData[i]['teacher']['first_name'] +
-                    " " +
-                    lessonData[i]['teacher']['last_name']));
+                lessonData[i]['room']['name'],
+                lessonData[i]['teacher']['name']));
           }
         }
       }
 
-      //Get task today
-      // response = await http.get(
-      //   Uri.parse(urlTask),
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //     'Accept': 'application/json',
-      //     'Authorization': 'Bearer ${globals.accessToken}',
-      //   },
-      // );
+      // Get task today
+      response = await http.get(
+        Uri.parse(urlTask),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ${globals.accessToken}',
+        },
+      );
 
       if (response.statusCode == 200) {
-        taskData = jsonDecode(response.body)['data'];
+        taskData = jsonDecode(response.body);
         print(taskData.length);
         for (int i = 0; i < taskData.length; i++) {
           for (var j = 0; j < taskData[i]['homeworks'].length; j++) {
             taskItems.add(buildTaskItem(
                 "Homework",
-                getTimeLeft(taskData[i]['homeworks'][j]['start_time']),
+                getTimeLeft(taskData[i]['homeworks'][j]['end_time']),
                 taskData[i]['name'],
                 taskData[i]['homeworks'][j]['homework_name'],
-                getColorLeft(taskData[i]['homeworks'][j]['start_time']),
+                getColorLeft(taskData[i]['homeworks'][j]['end_time']),
                 true));
             homeworks.add(Homework(
+              id: taskData[i]['homeworks'][j]['id'],
               assignmentName: taskData[i]['homeworks'][j]['homework_name'],
-              teacher: taskData[i]['teacher']['first_name'] +
-                  " " +
-                  taskData[i]['teacher']['last_name'],
+              teacher: taskData[i]['teacher']['name'],
               nameClass: taskData[i]['name'],
               dueDate: taskData[i]['homeworks'][j]['end_time'],
-              time: "1 hour",
-              imageUrl: getUrlImageClass(taskData[i]['type']),
+              time: taskData[i]['homeworks'][j]['time'],
+              imageUrl: getUrlImageClass(taskData[i]['type'] ?? 1),
             ));
           }
           // for (var j = 0; j < taskData[i]['exams'].length; j++) {

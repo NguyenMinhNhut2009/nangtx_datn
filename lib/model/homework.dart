@@ -6,9 +6,8 @@ class Homework {
   final String? nameClass;
   final String? teacher;
   final String? dueDate;
-  final String? time;
+  final int? time;
   final String? imageUrl;
-  final int? numberOfQuestion;
 
   Homework({
     this.id,
@@ -18,7 +17,6 @@ class Homework {
     this.dueDate,
     this.time,
     this.imageUrl,
-    this.numberOfQuestion,
   });
 }
 

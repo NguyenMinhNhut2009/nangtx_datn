@@ -75,7 +75,7 @@ Container buildTaskListItem(
           height: 10,
         ),
         Container(
-          height: 175,
+          // height: 175,
           width: double.infinity,
           decoration: BoxDecoration(
               border: Border.all(width: 1, color: Colors.grey),

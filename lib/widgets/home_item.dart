@@ -5,8 +5,8 @@ Container buildTaskItem(String typeTask, String timeLeft, String className,
   return Container(
     margin: EdgeInsets.only(right: 15),
     padding: EdgeInsets.all(12),
-    height: 120,
-    width: 250,
+    // height: 120,
+    // width: 250,
     decoration: BoxDecoration(
       color: color.withOpacity(0.1),
       borderRadius: BorderRadius.circular(20),
@@ -60,7 +60,6 @@ Container buildTaskItem(String typeTask, String timeLeft, String className,
           height: 10,
         ),
         Container(
-          width: 200,
           child: Row(
             children: [
               Icon(isHomework ? Icons.home_work_rounded : Icons.quiz_rounded,

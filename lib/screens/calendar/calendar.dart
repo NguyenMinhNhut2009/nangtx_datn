@@ -35,10 +35,9 @@ class _CalendarPageState extends State<CalendarPage> {
         'datetime': dateTime.toString(),
       }),
     );
-
     var jsonResponse = jsonDecode(response.body);
     if (response.statusCode == 200) {
-      var lessonDataSchedule = jsonDecode(response.body)['data'];
+      var lessonDataSchedule = jsonDecode(response.body);
       setState(() {
         lessonSchedules = [];
         for (int i = 0; i < lessonDataSchedule.length; i++) {
@@ -52,12 +51,13 @@ class _CalendarPageState extends State<CalendarPage> {
                     DateTime.parse(lessonDataSchedule[i]['lessons'][j]['start_time'])
                         .minute
                         .toString() +
-                    "0",
+                    ":0",
                 DateTime.parse(lessonDataSchedule[i]['lessons'][j]['start_time'])
                         .hour <
                     12,
                 getDiffStartEndTime(
-                    DateTime.parse(lessonDataSchedule[i]['lessons'][j]['start_time'])
+                    DateTime.parse(
+                            lessonDataSchedule[i]['lessons'][j]['start_time'])
                         .hour,
                     DateTime.parse(
                             lessonDataSchedule[i]['lessons'][j]['start_time'])
@@ -68,9 +68,7 @@ class _CalendarPageState extends State<CalendarPage> {
                         .minute),
                 lessonDataSchedule[i]["name"],
                 lessonDataSchedule[i]['lessons'][j]["lesson_name"],
-                lessonDataSchedule[i]['teacher']["first_name"] +
-                    " " +
-                    lessonDataSchedule[i]['teacher']["last_name"],
+                lessonDataSchedule[i]['teacher']["name"],
                 lessonDataSchedule[i]['teacher']["phone_number"],
                 lessonDataSchedule[i]['room']["name"]));
           }
