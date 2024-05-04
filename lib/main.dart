@@ -27,6 +27,7 @@ class _SchoolManagementState extends State<SchoolManagement> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(useMaterial3: false, backgroundColor: Colors.white),
       debugShowCheckedModeBanner: false,
       home: LoginScreen(),
     );

@@ -230,9 +230,7 @@ class _YourAssignemtState extends State<YourAssignemt> {
           false, // Không cho phép người dùng đóng cửa sổ bằng cách nhấn bên ngoài
       builder: (BuildContext context) {
         return Theme(
-          data: Theme.of(context).copyWith(
-            dialogBackgroundColor: Colors.white, // Đặt màu nền là màu trắng
-          ),
+          data: ThemeData(dialogBackgroundColor: Colors.white),
           child: AlertDialog(
             backgroundColor: Colors.white,
             title: Text('Submit confirmation'),
