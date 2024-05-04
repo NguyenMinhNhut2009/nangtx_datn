@@ -66,7 +66,8 @@ class ClassListItem extends StatelessWidget {
                     height: 5,
                   ),
                   Text(
-                    "Number of class sessions that took place: ${classInfo.numberOfLessonsStudied}/${classInfo.lessons!.length}",
+                    "Progress: ${classInfo.numberOfLessonsStudied}/${classInfo.lessons!.length} " +
+                        "lesson",
                     style: TextStyle(fontSize: 16.0, color: Colors.black),
                   ),
                   SizedBox(
@@ -78,6 +79,13 @@ class ClassListItem extends StatelessWidget {
                           classInfo.schedule ?? '',
                           style: TextStyle(fontSize: 16.0, color: Colors.black),
                         ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    "Room: ${classInfo.room!.name!}",
+                    style: TextStyle(fontSize: 16.0, color: Colors.black),
+                  ),
                   SizedBox(
                     height: 5,
                   ),

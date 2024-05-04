@@ -95,7 +95,7 @@ class _ComplaintsState extends State<Complaints> {
                                   width: 5,
                                 ),
                                 Text(
-                                  teacherlist[index].phone ?? '',
+                                  teacherlist[index].phoneNumber ?? '',
                                   style: TextStyle(
                                       fontSize: 16.0, color: Colors.black),
                                 ),

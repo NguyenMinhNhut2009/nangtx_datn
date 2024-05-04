@@ -15,7 +15,6 @@ class _NavigatorPageState extends State<NavigatorPage> {
   final List pages = [
     HomePage(),
     CalendarPage(),
-    null,
     ProfilePage(),
   ];
   @override
@@ -46,12 +45,6 @@ class _NavigatorPageState extends State<NavigatorPage> {
                 Icons.access_time_outlined,
               ),
               label: 'Schedule',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.notifications,
-              ),
-              label: 'Notification',
             ),
             BottomNavigationBarItem(
               icon: Icon(

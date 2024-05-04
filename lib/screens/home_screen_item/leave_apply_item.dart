@@ -62,6 +62,18 @@ class LeaveApplyItem extends StatelessWidget {
               SizedBox(
                 height: 5,
               ),
+              Container(
+                width: MediaQuery.of(context).size.width - 70,
+                child: Text(
+                  "Start time: ${data.lesson!.startTime}",
+                  style: TextStyle(fontSize: 16.0, color: Colors.black),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              SizedBox(
+                height: 5,
+              ),
             ],
           ),
         ],

@@ -81,50 +81,37 @@ class HomeworkListItem extends StatelessWidget {
             ],
           ),
         ),
-        hwInfo.isFinished != 0
-            ? Positioned(
-                top: 10,
-                right: 0,
-                child: Container(
+        Positioned.fill(
+            child: Align(
+          alignment: Alignment.centerRight,
+          child: hwInfo.isFinished == 0
+              ? InkWell(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => YourAssignemt(
+                                  id: hwInfo.id!,
+                                )));
+                  },
+                  child: Ink(
+                    padding: EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.blue.withOpacity(0.1), // Màu nền khi hover
+                    ),
+                    child: Icon(Icons.arrow_circle_right),
+                  ),
+                )
+              : Container(
                   width: 15, // Điều chỉnh kích thước của checkbox
                   height: 15,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: Colors.green,
                   ),
-                  // child: Icon(
-                  //   Icons.check,
-                  //   size: 16, // Điều chỉnh kích thước của biểu tượng check
-                  //   color: Colors.white, // Màu của biểu tượng check
-                  // ),
-                ))
-            : SizedBox(),
-        hwInfo.isFinished == 0
-            ? Positioned.fill(
-                child: Align(
-                  alignment: Alignment.centerRight,
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => YourAssignemt(
-                                    id: hwInfo.id!,
-                                  )));
-                    },
-                    child: Ink(
-                      padding: EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color:
-                            Colors.blue.withOpacity(0.1), // Màu nền khi hover
-                      ),
-                      child: Icon(Icons.arrow_circle_right),
-                    ),
-                  ),
                 ),
-              )
-            : SizedBox(),
+        )),
       ],
     );
   }

@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'package:datn_test/constants/app_colors.dart';
 import 'package:datn_test/constants/constants.dart';
+import 'package:datn_test/constants/dart_notification_center.dart';
 import 'package:datn_test/model/asignment.dart';
 import 'package:datn_test/model/class.dart';
 import 'package:datn_test/model/homework.dart';
@@ -103,27 +105,6 @@ Future<void> validateAndSubmit(
               imageUrl: getUrlImageClass(taskData[i]['type'] ?? 1),
             ));
           }
-          // for (var j = 0; j < taskData[i]['exams'].length; j++) {
-          //   taskItems.add(buildTaskItem(
-          //     "Exam",
-          //     getTimeLeft(taskData[i]['exams'][j]['start_time']),
-          //     taskData[i]['name'],
-          //     taskData[i]['exams'][j]['exam_name'],
-          //     getColorLeft(taskData[i]['exams'][j]['start_time']),
-          //     false,
-          //   ));
-
-          //   exams.add(Homework(
-          //     assignmentName: taskData[i]['exams'][j]['exam_name'],
-          //     teacher: taskData[i]['teacher']['first_name'] +
-          //         " " +
-          //         taskData[i]['teacher']['last_name'],
-          //     nameClass: taskData[i]['name'],
-          //     dueDate: taskData[i]['exams'][j]['end_time'],
-          //     time: "1 hour",
-          //     imageUrl: getUrlImageClass(taskData[i]['type']),
-          //   ));
-          // }
         }
       }
 
@@ -363,9 +344,10 @@ Future<bool> postHomeWorkResultStore(String studentId, String homeworkId,
 
     formData.headers.addAll(headers);
     var response = await formData.send();
-    print(response);
-    print(response);
     if (response.statusCode == 201) {
+      print("Tesst log post homework");
+      DartNotificationCenter.post(
+          channel: Const.LOAD_LIST_HOMEWORK, options: {});
       return true;
     } else {
       return false;

@@ -126,26 +126,6 @@ class _ProfilePageState extends State<ProfilePage> {
                   child: ListView(
                     children: <Widget>[
                       ProfileListItem(
-                        icon: LineAwesomeIcons.user_shield,
-                        text: 'Privacy',
-                        onTap: false,
-                      ),
-                      ProfileListItem(
-                        icon: LineAwesomeIcons.history,
-                        text: 'Purchase History',
-                        onTap: false,
-                      ),
-                      ProfileListItem(
-                        icon: LineAwesomeIcons.question_circle,
-                        text: 'Help & Support',
-                        onTap: false,
-                      ),
-                      ProfileListItem(
-                        icon: LineAwesomeIcons.cog,
-                        text: 'Settings',
-                        onTap: false,
-                      ),
-                      ProfileListItem(
                         icon: LineAwesomeIcons.lock,
                         text: 'Change Password',
                         onTap: true,
