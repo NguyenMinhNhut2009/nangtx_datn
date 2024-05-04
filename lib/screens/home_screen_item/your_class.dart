@@ -31,10 +31,18 @@ class _YourClassState extends State<YourClass> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('Your Classes'),
+        backgroundColor: Colors.blue,
+        title: Text(
+          'Your Classes',
+          style: TextStyle(color: Colors.white),
+        ),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -46,11 +54,13 @@ class _YourClassState extends State<YourClass> {
             )
           : Container(
               child: ListView.builder(
+                padding: EdgeInsets.only(left: 16, right: 16),
                 itemCount: classList!.length,
                 itemBuilder: (context, index) {
                   return ClassListItem(
                     classInfo: classList![index],
                     checkPage: true,
+                    index: index + 1,
                   );
                 },
               ),

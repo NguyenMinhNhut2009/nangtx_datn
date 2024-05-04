@@ -35,6 +35,7 @@ class _CalendarPageState extends State<CalendarPage> {
         'datetime': dateTime.toString(),
       }),
     );
+    print(response);
     var jsonResponse = jsonDecode(response.body);
     if (response.statusCode == 200) {
       var lessonDataSchedule = jsonDecode(response.body);

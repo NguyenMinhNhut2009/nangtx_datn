@@ -19,10 +19,11 @@ class _PermissionFormState extends State<PermissionForm> {
   TextEditingController firstAndLastNameVC = TextEditingController(text: '');
   TextEditingController nameOfSubjectVC = TextEditingController(text: '');
   TextEditingController nameOfInstructorVC = TextEditingController(text: '');
-  TextEditingController dateOfTimeVC = TextEditingController(text: '');
+  // TextEditingController dateOfTimeVC = TextEditingController(text: '');
   TextEditingController reasonPleaseThink = TextEditingController(text: '');
   int? id;
   List<ClassList> leaveApplyList = [];
+  ClassList? inputClassList;
   @override
   void initState() {
     // TODO: implement initState
@@ -45,10 +46,18 @@ class _PermissionFormState extends State<PermissionForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('Permisson Form'),
+        backgroundColor: Colors.blue,
+        title: Text(
+          'Permisson Form',
+          style: TextStyle(color: Colors.white),
+        ),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -58,11 +67,10 @@ class _PermissionFormState extends State<PermissionForm> {
         children: [
           Expanded(
             child: ListView(
-              // mainAxisAlignment: MainAxisAlignment.start,
-              // crossAxisAlignment: CrossAxisAlignment.start,
-              padding: EdgeInsets.all(8.0),
+              padding: EdgeInsets.all(16.0),
               children: [
-                Text("First and last name"),
+                Text("First and last name",
+                    style: TextStyle(fontSize: 16.0, color: Colors.black)),
                 SizedBox(
                   height: 15,
                 ),
@@ -81,13 +89,171 @@ class _PermissionFormState extends State<PermissionForm> {
                 SizedBox(
                   height: 20,
                 ),
-                Text("Name of the lesson"),
+                Text("Class name",
+                    style: TextStyle(fontSize: 16.0, color: Colors.black)),
+                SizedBox(
+                  height: 15,
+                ),
+                GestureDetector(
+                  onTap: () async {
+                    final data = await showModalBottomSheet(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return Column(
+                          children: [
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text("Class list",
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w700)),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Container(
+                              height: 0.5,
+                              color: Color(0xffDCDCDC),
+                            ),
+                            Expanded(
+                              child: ListView.builder(
+                                  itemCount: leaveApplyList.length,
+                                  itemBuilder: (context, index) {
+                                    return GestureDetector(
+                                      onTap: () async {
+                                        Navigator.pop(
+                                            context, leaveApplyList[index]);
+                                        setState(() {
+                                          nameOfSubjectVC.text =
+                                              leaveApplyList[index].name!;
+                                        });
+                                      },
+                                      child: Container(
+                                        padding: EdgeInsets.only(
+                                            left: 16,
+                                            bottom: 16,
+                                            right: 16,
+                                            top: 8),
+                                        decoration: BoxDecoration(
+                                            color: Colors.transparent,
+                                            border: Border(
+                                                bottom: BorderSide(
+                                                    color: Color(0xffDCDCDC),
+                                                    width: 0.5))),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "${index + 1}. ",
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 18.0,
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                            Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  leaveApplyList[index].name!,
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 18.0,
+                                                      color: Colors.blue),
+                                                ),
+                                                SizedBox(
+                                                  height: 5,
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                      'Teacher: ',
+                                                      style: TextStyle(
+                                                          fontSize: 16.0,
+                                                          color: Colors.black),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 5,
+                                                    ),
+                                                    Text(
+                                                      leaveApplyList[index]
+                                                              .teacher!
+                                                              .name ??
+                                                          '',
+                                                      style: TextStyle(
+                                                          fontSize: 16.0,
+                                                          color: Colors.black),
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: 5,
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                  }),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                    if (data != null) {
+                      print(data);
+                      setState(() {
+                        inputClassList = data;
+                      });
+                    }
+                  },
+                  child: Stack(
+                    alignment: AlignmentDirectional.centerEnd,
+                    children: [
+                      TextFormField(
+                        cursorColor: Colors.black,
+                        readOnly: true,
+                        enabled: false,
+                        decoration: InputDecoration(
+                            hintStyle: TextStyle(color: Colors.black),
+                            hintText: nameOfSubjectVC.text,
+                            border: OutlineInputBorder()),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment
+                            .spaceBetween, // Căn các phần tử vào giữa
+                        crossAxisAlignment:
+                            CrossAxisAlignment.center, // Căn theo trục chính
+                        children: [
+                          Spacer(), // Dùng Spacer để đẩy Icon về phía bên phải
+                          Icon(Icons.arrow_drop_down),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Text("Name of the lesson",
+                    style: TextStyle(fontSize: 16.0, color: Colors.black)),
                 SizedBox(
                   height: 15,
                 ),
                 GestureDetector(
                   onTap: () {
-                    _showItemAndLessonBottomSheet(context);
+                    _showLessonsBottomSheet(context, inputClassList!);
                   },
                   child: Stack(
                     alignment: AlignmentDirectional.centerEnd,
@@ -157,68 +323,15 @@ class _PermissionFormState extends State<PermissionForm> {
               color: Colors.blue,
               width: MediaQuery.of(context).size.width,
               height: 50,
-              child: Center(child: Text("Submit")),
+              child: Center(
+                  child: Text(
+                "Submit",
+                style: TextStyle(fontSize: 20.0, color: Colors.white),
+              )),
             ),
           ))
         ],
       ),
-    );
-  }
-
-  void _showItemAndLessonBottomSheet(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      builder: (BuildContext context) {
-        return ListView.builder(
-            itemCount: leaveApplyList.length,
-            itemBuilder: (context, index) {
-              return GestureDetector(
-                  onTap: () async {
-                    Navigator.pop(context);
-                    _showLessonsBottomSheet(context, leaveApplyList[index]);
-                  },
-                  child: Card(
-                    margin: EdgeInsets.all(16.0),
-                    elevation: 4.0, // Độ nâng của Card
-                    child: ListTile(
-                      contentPadding: EdgeInsets.only(
-                          right: 16.0,
-                          left: 16.0,
-                          top: 10,
-                          bottom: 10), // Padding của ListTile
-
-                      title: Text(
-                        leaveApplyList[index].name ?? '',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18.0,
-                        ),
-                      ),
-                      subtitle: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Text(leaveApplyList[index].teacher!.name ?? ''),
-                          ]),
-                    ),
-                  )
-                  //  Container(
-                  //     decoration: BoxDecoration(
-                  //         color: Colors.white,
-                  //         borderRadius: BorderRadius.only(
-                  //           topLeft: Radius.circular(18),
-                  //           topRight: Radius.circular(18),
-                  //         )),
-                  //     padding: EdgeInsets.all(12.0),
-                  //     child: Text(
-                  //       leaveApplyList[index].name!,
-                  //       style: TextStyle(fontSize: 15),
-                  //     )),
-                  );
-            });
-      },
     );
   }
 
@@ -229,40 +342,79 @@ class _PermissionFormState extends State<PermissionForm> {
       context: context,
       builder: (BuildContext context) {
         return Container(
-          child: ListView.builder(
-            itemCount: lessons.length,
-            itemBuilder: (context, index) {
-              final lesson = lessons[index];
-              return GestureDetector(
-                onTap: () {
-                  setState(() {
-                    nameOfInstructorVC.text = lesson.lessonName!;
-                    id = lesson.id;
-                  });
-                  print("lesson abc $id");
-                  Navigator.pop(context, lesson.id);
-                },
-                child: Card(
-                  margin: EdgeInsets.all(16.0),
-                  elevation: 4.0, // Độ nâng của Card
-                  child: ListTile(
-                    contentPadding: EdgeInsets.only(
-                        right: 16.0,
-                        left: 16.0,
-                        top: 10,
-                        bottom: 10), // Padding của ListTile
-
-                    title: Text(
-                      lesson.lessonName! ?? '',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18.0,
+          padding: EdgeInsets.only(left: 16, bottom: 16, right: 16, top: 8),
+          child: Column(
+            children: [
+              SizedBox(
+                height: 10,
+              ),
+              Text("Lesson list",
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700)),
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                height: 0.5,
+                color: Color(0xffDCDCDC),
+              ),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: lessons.length,
+                  itemBuilder: (context, index) {
+                    final lesson = lessons[index];
+                    return GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          nameOfInstructorVC.text = lesson.lessonName!;
+                          id = lesson.id;
+                        });
+                        Navigator.pop(context, lesson.id);
+                      },
+                      child: Container(
+                        padding: EdgeInsets.only(top: 16, bottom: 16),
+                        decoration: BoxDecoration(
+                            color: Colors.transparent,
+                            border: Border(
+                                bottom: BorderSide(
+                                    color: Color(0xffDCDCDC), width: 0.5))),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "${index + 1}. ",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18.0,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  lesson.lessonName! ?? '',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18.0,
+                                      color: Colors.blue),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ),
+                    );
+                  },
                 ),
-              );
-            },
+              ),
+            ],
           ),
         );
       },

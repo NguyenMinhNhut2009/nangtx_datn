@@ -21,17 +21,21 @@ class _ComplaintsState extends State<Complaints> {
 
   loadData() async {
     teacherlist = await getTeacherList();
-    print(teacherlist);
     setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
-          title: Text('Your Complains'),
+          backgroundColor: Colors.blue,
+          title: Text('Your Complains', style: TextStyle(color: Colors.white)),
           leading: IconButton(
-            icon: Icon(Icons.arrow_back),
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            ),
             onPressed: () {
               Navigator.of(context).pop();
             },
@@ -43,75 +47,74 @@ class _ComplaintsState extends State<Complaints> {
               )
             : ListView.builder(
                 itemCount: teacherlist.length,
+                padding: EdgeInsets.all(16),
                 itemBuilder: (context, index) {
-                  return Card(
-                    margin: EdgeInsets.all(8.0),
-                    elevation: 4.0,
-                    child: Container(
-                      margin: EdgeInsets.all(8.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            teacherlist[index].name ?? '',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18.0,
+                  return Container(
+                    padding: EdgeInsets.only(top: 16, bottom: 16),
+                    decoration: BoxDecoration(
+                        color: Colors.transparent,
+                        border: Border(
+                            bottom: BorderSide(
+                                color: Color(0xffDCDCDC), width: 0.5))),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "${index + 1}. ",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18.0,
+                          ),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              teacherlist[index].name ?? '',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18.0,
+                                  color: Colors.blue),
                             ),
-                          ),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                "Phone: ",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18.0,
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  'Phone: ',
+                                  style: TextStyle(
+                                      fontSize: 16.0, color: Colors.black),
                                 ),
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Text(
-                                teacherlist[index].phone ?? '',
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                "Email: ",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18.0,
+                                SizedBox(
+                                  width: 5,
                                 ),
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Text(
-                                teacherlist[index].email ?? '',
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          // Text(
-                          //   teacherlist[index].location ?? '',
-                          //   style: TextStyle(
-                          //     fontWeight: FontWeight.bold,
-                          //     fontSize: 18.0,
-                          //   ),
-                          // ),
-                        ],
-                      ),
+                                Text(
+                                  teacherlist[index].phone ?? '',
+                                  style: TextStyle(
+                                      fontSize: 16.0, color: Colors.black),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Text(
+                              "Email: ${teacherlist[index].email}",
+                              style: TextStyle(
+                                  fontSize: 16.0, color: Colors.black),
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   );
                 }));

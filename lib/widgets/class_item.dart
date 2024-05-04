@@ -6,108 +6,89 @@ import '../model/class.dart';
 class ClassListItem extends StatelessWidget {
   final ClassList classInfo;
   final bool checkPage;
+  final int index;
 
-  ClassListItem({required this.classInfo, required this.checkPage});
+  ClassListItem(
+      {required this.classInfo, required this.checkPage, required this.index});
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: EdgeInsets.all(8.0),
-      elevation: 4.0, // Độ nâng của Card
-      child: ListTile(
-        contentPadding: EdgeInsets.only(
-            right: 16.0,
-            left: 16.0,
-            top: 10,
-            bottom: 10), // Padding của ListTile
-        leading: Container(
-          width: 40,
-          height: 40,
+    return Stack(
+      children: [
+        Container(
+          padding: EdgeInsets.only(top: 16, bottom: 16),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(50),
-            border: Border.all(width: 1, color: Colors.white),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.blueGrey.withOpacity(0.2),
-                blurRadius: 12,
-                spreadRadius: 8,
-              )
-            ],
-            image: DecorationImage(
-              fit: BoxFit.cover,
-              image: AssetImage(classInfo.imageUrl ?? ''),
-            ),
-          ),
-        ),
-        title: Text(
-          classInfo.name!,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 18.0,
-          ),
-        ),
-        subtitle: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: 5,
-            ),
-            Row(
-              children: [
-                Icon(
-                  Icons.person,
-                  size: 16,
+              color: Colors.transparent,
+              border: Border(
+                  bottom: BorderSide(color: Color(0xffDCDCDC), width: 0.5))),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "${index}. ",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18.0,
                 ),
-                SizedBox(
-                  width: 5,
-                ),
-                Text(classInfo.teacher!.name ?? ''),
-              ],
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            Row(
-              children: [
-                Icon(
-                  Icons.class_rounded,
-                  size: 16,
-                ),
-                SizedBox(
-                  width: 5,
-                ),
-                Text(
-                    "Lesson: ${classInfo.numberOfLessonsStudied}/${classInfo.lessons!.length}"),
-              ],
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            classInfo.schedule == null
-                ? SizedBox()
-                : Row(
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    classInfo.name!,
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18.0,
+                        color: Colors.blue),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Row(
                     children: [
-                      Icon(
-                        Icons.schedule_rounded,
-                        size: 16,
+                      Text(
+                        'Teacher: ',
+                        style: TextStyle(fontSize: 16.0, color: Colors.black),
                       ),
-                      SizedBox(
-                        width: 5,
+                      Text(
+                        classInfo.teacher!.name ?? '',
+                        style: TextStyle(fontSize: 16.0, color: Colors.black),
                       ),
-                      Text(classInfo.schedule ?? ''),
                     ],
                   ),
-            SizedBox(
-              height: 5,
-            ),
-          ],
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    "Number of class sessions that took place: ${classInfo.numberOfLessonsStudied}/${classInfo.lessons!.length}",
+                    style: TextStyle(fontSize: 16.0, color: Colors.black),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  classInfo.schedule == null
+                      ? SizedBox()
+                      : Text(
+                          classInfo.schedule ?? '',
+                          style: TextStyle(fontSize: 16.0, color: Colors.black),
+                        ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
-        trailing: Column(
-          children: [
-            SizedBox(
-              height: 10,
-            ),
-            InkWell(
+        Positioned.fill(
+          child: Align(
+            alignment: Alignment.centerRight,
+            child: InkWell(
               onTap: () {
                 Navigator.push(
                     context,
@@ -126,9 +107,9 @@ class ClassListItem extends StatelessWidget {
                 child: Icon(Icons.remove_red_eye_outlined),
               ),
             ),
-          ],
+          ),
         ),
-      ),
+      ],
     );
   }
 }

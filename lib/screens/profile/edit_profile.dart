@@ -1,5 +1,7 @@
+import 'package:datn_test/constants/constants.dart';
 import 'package:datn_test/navigator.dart';
 import 'package:datn_test/screens/login/login_api.dart';
+import 'package:datn_test/widgets/text_field_container.dart';
 import 'package:flutter/material.dart';
 import 'package:datn_test/globals.dart' as globals;
 import 'package:http/http.dart';
@@ -28,9 +30,16 @@ class _EditProfileState extends State<EditProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Proflie'),
+        backgroundColor: Colors.blue,
+        title: Text(
+          'Edit Proflie',
+          style: TextStyle(color: Colors.white),
+        ),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -40,56 +49,39 @@ class _EditProfileState extends State<EditProfile> {
         children: [
           Expanded(
             child: ListView(
-              // mainAxisAlignment: MainAxisAlignment.start,
-              // crossAxisAlignment: CrossAxisAlignment.start,
-              padding: EdgeInsets.all(8.0),
+              padding: EdgeInsets.all(16.0),
               children: [
-                Text("Name"),
+                Text("Name",
+                    style: TextStyle(fontSize: 16.0, color: Colors.black)),
                 SizedBox(
                   height: 15,
                 ),
-                TextFormField(
-                  textAlign: TextAlign.start,
-                  controller: nameVC,
-                  cursorColor: Colors.black,
-                  decoration: InputDecoration(
-                    floatingLabelBehavior: FloatingLabelBehavior.never,
-                    alignLabelWithHint: true,
-                    labelText: nameVC.text,
-                    border: OutlineInputBorder(),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                          color: Colors.black), // Màu viền khi không focus
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(color: Colors.black), // Màu viền khi focus
+                TextFieldContainer(
+                  child: TextFormField(
+                    textAlign: TextAlign.start,
+                    controller: nameVC,
+                    cursorColor: kPrimaryColor,
+                    decoration: InputDecoration(
+                      floatingLabelBehavior: FloatingLabelBehavior.never,
+                      border: InputBorder.none,
                     ),
                   ),
                 ),
                 SizedBox(
                   height: 20,
                 ),
-                Text("Phone Number"),
+                Text("Phone Number",
+                    style: TextStyle(fontSize: 16.0, color: Colors.black)),
                 SizedBox(
                   height: 15,
                 ),
-                TextFormField(
-                  textAlign: TextAlign.start,
-                  controller: phoneNumberVC,
-                  cursorColor: Colors.black,
-                  decoration: InputDecoration(
-                    floatingLabelBehavior: FloatingLabelBehavior.never,
-                    alignLabelWithHint: true,
-                    labelText: nameVC.text,
-                    border: OutlineInputBorder(),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                          color: Colors.black), // Màu viền khi không focus
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(color: Colors.black), // Màu viền khi focus
+                TextFieldContainer(
+                  child: TextFormField(
+                    controller: phoneNumberVC,
+                    cursorColor: kPrimaryColor,
+                    decoration: InputDecoration(
+                      floatingLabelBehavior: FloatingLabelBehavior.never,
+                      border: InputBorder.none,
                     ),
                   ),
                 ),
@@ -112,7 +104,7 @@ class _EditProfileState extends State<EditProfile> {
               child: Center(
                   child: Text(
                 "Update",
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(fontSize: 20.0, color: Colors.white),
               )),
             ),
           ))

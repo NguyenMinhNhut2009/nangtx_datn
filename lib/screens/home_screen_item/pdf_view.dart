@@ -27,7 +27,6 @@ class _PdfViewControllerState extends BaseState<PdfViewController> {
           .asUint8List();
       setState(() {});
     } catch (e) {
-      print(e.toString());
       throw (e);
     }
   }

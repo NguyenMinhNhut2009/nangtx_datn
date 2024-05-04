@@ -33,10 +33,18 @@ class _LeaveApplyState extends State<LeaveApply> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('Leave Apply'),
+        backgroundColor: Colors.blue,
+        title: Text(
+          'Leave Apply',
+          style: TextStyle(color: Colors.white),
+        ),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -47,15 +55,21 @@ class _LeaveApplyState extends State<LeaveApply> {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => PermissionForm()));
               },
-              icon: Icon(Icons.add))
+              icon: Icon(
+                Icons.add,
+                size: 20,
+                color: Colors.white,
+              ))
         ],
       ),
       body: Expanded(
         child: ListView.builder(
+          padding: EdgeInsets.only(left: 16, right: 16),
           itemCount: listLeaveApply.length,
           itemBuilder: (context, index) {
             return LeaveApplyItem(
               data: listLeaveApply[index],
+              index: index + 1,
             );
           },
         ),

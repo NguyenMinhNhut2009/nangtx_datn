@@ -1,88 +1,99 @@
 import 'package:datn_test/screens/home_screen_item/class_your_assignment.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../model/class.dart';
 import '../model/homework.dart';
 
 class HomeworkListItem extends StatelessWidget {
   final HomeWork hwInfo;
+  final int index;
 
-  HomeworkListItem({required this.hwInfo});
+  HomeworkListItem({required this.hwInfo, required this.index});
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: EdgeInsets.all(8.0),
-      elevation: 4.0,
-      child: ListTile(
-        contentPadding: EdgeInsets.only(
-            right: 16.0,
-            left: 16.0,
-            top: 10,
-            bottom: 10), // Padding của ListTile
-        title: Text(
-          hwInfo.assignmentName!,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 18.0,
+    return Stack(
+      children: [
+        Container(
+          padding: EdgeInsets.only(top: 16, bottom: 16),
+          decoration: BoxDecoration(
+              color: Colors.transparent,
+              border: Border(
+                  bottom: BorderSide(color: Color(0xffDCDCDC), width: 0.5))),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "${index}. ",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18.0,
+                ),
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "${hwInfo.assignmentName} " +
+                        "${hwInfo.score != null ? "(${hwInfo.score} / 100)" : ""}",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18.0,
+                        color: Colors.blue),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    'Class Name: ${hwInfo.nameClass!}',
+                    style: TextStyle(fontSize: 16.0, color: Colors.black),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    'Teacher: ${hwInfo.teacher! ?? ''}',
+                    style: TextStyle(fontSize: 16.0, color: Colors.black),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    "Number of questions: ${hwInfo.countQuestion!}",
+                    style: TextStyle(fontSize: 16.0, color: Colors.black),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    "Expiration date: ${DateFormat('dd-MM-yyyy').format(DateTime.parse(hwInfo.endTime!))}",
+                    style: TextStyle(fontSize: 16.0, color: Colors.black),
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
-        subtitle: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: 5,
-            ),
-            Row(
-              children: [
-                Icon(
-                  Icons.class_outlined,
-                  size: 16,
+        hwInfo.isFinished != 0
+            ? Positioned(
+                top: 10,
+                right: 0,
+                child: Icon(
+                  Icons.check_box,
+                  color: Colors.green,
                 ),
-                SizedBox(
-                  width: 5,
-                ),
-                Text(hwInfo.nameClass!),
-              ],
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            Row(
-              children: [
-                Icon(
-                  Icons.person,
-                  size: 16,
-                ),
-                SizedBox(
-                  width: 5,
-                ),
-                Text(hwInfo.teacher!),
-              ],
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            Row(
-              children: [
-                Icon(
-                  Icons.schedule_rounded,
-                  size: 16,
-                ),
-                SizedBox(
-                  width: 5,
-                ),
-                Text("${hwInfo.time!}"),
-              ],
-            ),
-          ],
-        ),
-        trailing: Column(
-          children: [
-            SizedBox(
-              height: 10,
-            ),
-            InkWell(
+              )
+            : SizedBox(),
+        Positioned.fill(
+          child: Align(
+            alignment: Alignment.centerRight,
+            child: InkWell(
               onTap: () {
                 Navigator.push(
                     context,
@@ -97,12 +108,12 @@ class HomeworkListItem extends StatelessWidget {
                   shape: BoxShape.circle,
                   color: Colors.blue.withOpacity(0.1), // Màu nền khi hover
                 ),
-                child: Icon(Icons.arrow_forward_rounded),
+                child: Icon(Icons.remove_red_eye_outlined),
               ),
             ),
-          ],
+          ),
         ),
-      ),
+      ],
     );
   }
 }

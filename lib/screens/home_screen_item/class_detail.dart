@@ -28,7 +28,6 @@ class _ClassDetailPageState extends State<ClassDetailPage> {
     classListDetail = await getClassDetail(widget.classId);
     if (classListDetail.length != 0) {
       lessons = classListDetail[0].lessons!;
-      print(lessons.length);
     }
     setState(() {});
   }
@@ -40,10 +39,16 @@ class _ClassDetailPageState extends State<ClassDetailPage> {
             child: CircularProgressIndicator(),
           )
         : Scaffold(
+            backgroundColor: Colors.white,
             appBar: AppBar(
-              title: Text('Your Classes Detail'),
+              backgroundColor: Colors.blue,
+              title: Text('Your Classes Detail',
+                  style: TextStyle(color: Colors.white)),
               leading: IconButton(
-                icon: Icon(Icons.arrow_back),
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: Colors.white,
+                ),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
@@ -51,76 +56,136 @@ class _ClassDetailPageState extends State<ClassDetailPage> {
             ),
             body: ListView.builder(
                 itemCount: lessons.length,
+                padding: EdgeInsets.only(left: 16, right: 16),
                 itemBuilder: (context, index) {
-                  return Card(
-                    margin: EdgeInsets.all(8.0),
-                    elevation: 4.0,
-                    child: Container(
-                      margin: EdgeInsets.all(8.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "${lessons[index].lessonName}",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18.0,
+                  return Container(
+                    padding: EdgeInsets.only(top: 16, bottom: 16),
+                    decoration: BoxDecoration(
+                        color: Colors.transparent,
+                        border: Border(
+                            bottom: BorderSide(
+                                color: Color(0xffDCDCDC), width: 0.5))),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "${index + 1}. ",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18.0,
+                          ),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              lessons[index].lessonName!,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18.0,
+                                  color: Colors.blue),
                             ),
-                          ),
-                          classListDetail[0].schedule == null
-                              ? SizedBox()
-                              : Text("${classListDetail[0].schedule}"),
-                          Text("${classListDetail[0].teacher!.name}"),
-                          Text("Lesson: ${index + 1}"),
-                          Row(
-                            children: [
-                              Text("Attendence Status: " +
-                                  "${lessons[index].attendenceStatus != null ? lessons[index].attendenceStatus : "None"}"),
-                            ],
-                          ),
-                          widget.checkPage == true
-                              ? lessons[index].documents!.length != 0
-                                  ? GestureDetector(
-                                      onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  PdfViewController(
-                                                    url:
-                                                        'https://cdn.syncfusion.com/content/PDFViewer/flutter-succinctly.pdf',
-                                                    title:
-                                                        '${lessons[index].documents![0].name}',
-                                                  )),
-                                        );
-                                      },
-                                      child: Text(
-                                        "Documents After Class",
-                                        style: TextStyle(
-                                          decoration: TextDecoration
-                                              .underline, // Thêm gạch chân
-                                          decorationColor:
-                                              Colors.blue, // Màu của gạch chân
-                                          decorationThickness:
-                                              2, // Độ dày của gạch chân
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  'Teacher: ',
+                                  style: TextStyle(
+                                      fontSize: 16.0, color: Colors.black),
+                                ),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Text(
+                                  "${classListDetail[0].teacher!.name}",
+                                  style: TextStyle(
+                                      fontSize: 16.0, color: Colors.black),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            classListDetail[0].schedule == null
+                                ? SizedBox()
+                                : Text(
+                                    "Schedule: ${classListDetail[0].schedule}",
+                                    style: TextStyle(
+                                        fontSize: 16.0, color: Colors.black)),
+                            classListDetail[0].schedule == null
+                                ? SizedBox()
+                                : SizedBox(
+                                    height: 5,
+                                  ),
+                            Text(
+                              "Lesson: ${index + 1}",
+                              style: TextStyle(
+                                  fontSize: 16.0, color: Colors.black),
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                    "Attendence Status: " +
+                                        "${lessons[index].attendenceStatus != null ? lessons[index].attendenceStatus : "None"}",
+                                    style: TextStyle(
+                                        fontSize: 16.0, color: Colors.black)),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            widget.checkPage == true
+                                ? lessons[index].documents!.length != 0
+                                    ? GestureDetector(
+                                        onTap: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    PdfViewController(
+                                                      url:
+                                                          'https://cdn.syncfusion.com/content/PDFViewer/flutter-succinctly.pdf',
+                                                      title:
+                                                          '${lessons[index].documents![0].name ?? "Document"} ',
+                                                    )),
+                                          );
+                                        },
+                                        child: Text(
+                                          "Documents After Class",
+                                          style: TextStyle(
+                                              decoration: TextDecoration
+                                                  .underline, // Thêm gạch chân
+                                              decorationColor: Colors
+                                                  .blue, // Màu của gạch chân
+                                              decorationThickness: 2, // Đ
+
+                                              fontSize: 16.0,
+                                              color: Colors.black),
                                         ),
-                                      ),
-                                    )
-                                  : Text(
-                                      "Documents After Class",
-                                      style: TextStyle(
-                                        decoration: TextDecoration
-                                            .underline, // Thêm gạch chân
-                                        decorationColor:
-                                            Colors.blue, // Màu của gạch chân
-                                        decorationThickness:
-                                            2, // Độ dày của gạch chân
-                                      ),
-                                    )
-                              : SizedBox(),
-                        ],
-                      ),
+                                      )
+                                    : SizedBox()
+                                // Text(
+                                //     "Documents After Class",
+                                //     style: TextStyle(
+                                //       fontSize: 16.0,
+                                //       color: Colors.black,
+                                //       // Độ dày của gạch chân
+                                //     ),
+                                //   )
+                                : SizedBox()
+                          ],
+                        ),
+                      ],
                     ),
                   );
                 }));

@@ -29,6 +29,9 @@ class HomeWork {
   String? nameClass;
   String? assignmentName;
   Classroom? classroom;
+  dynamic? score;
+  int? countQuestion;
+  int? isFinished;
 
   HomeWork(
       {this.id,
@@ -38,7 +41,10 @@ class HomeWork {
       this.teacher,
       this.nameClass,
       this.assignmentName,
-      this.classroom});
+      this.classroom,
+      this.countQuestion,
+      this.isFinished,
+      this.score});
 
   HomeWork.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -51,6 +57,9 @@ class HomeWork {
     classroom = json['classroom'] != null
         ? new Classroom.fromJson(json['classroom'])
         : null;
+    countQuestion = json['count_question'];
+    isFinished = json['is_finished'];
+    score = json['score'];
   }
 
   Map<String, dynamic> toJson() {
@@ -65,6 +74,9 @@ class HomeWork {
     if (this.classroom != null) {
       data['classroom'] = this.classroom!.toJson();
     }
+    data['count_question'] = this.countQuestion;
+    data['is_finished'] = this.isFinished;
+    data['score'] = this.score;
     return data;
   }
 }

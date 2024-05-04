@@ -21,96 +21,90 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return WillPopScope(
-      onWillPop: () async {
-        // Trả về false để ngăn chặn việc quay lại
-        return false;
-      },
-      child: Scaffold(
-        body: SizedBox(
-          width: size.width,
-          height: size.height,
-          child: SingleChildScrollView(
-            child: Stack(
-              children: [
-                SizedBox(
-                  height: 20,
-                ),
-                const Upside(
-                  imgUrl: "assets/icons/login.png",
-                ),
-                const PageTitleBar(title: 'Login to your account'),
-                Padding(
-                  padding: const EdgeInsets.only(top: 320.0),
-                  child: Container(
-                    width: double.infinity,
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(50),
-                        topRight: Radius.circular(50),
-                      ),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        iconButton(context),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        const Text(
-                          "or use your email account",
-                          style: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 13,
-                              fontWeight: FontWeight.w600),
-                        ),
-                        Form(
-                          child: Column(
-                            children: [
-                              RoundedInputField(
-                                hintText: "Email",
-                                icon: Icons.email,
-                                controller: emailController,
-                              ),
-                              RoundedPasswordField(
-                                controller: passwordController,
-                              ),
-                              RoundedButton(
-                                text: 'LOGIN',
-                                press: () {
-                                  validateAndSubmit(
-                                    emailController.text,
-                                    passwordController.text,
-                                    context,
-                                  );
-                                },
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              const Text(
-                                'Forgot password?',
-                                style: TextStyle(
-                                    color: kPrimaryColor,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 13),
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              )
-                            ],
-                          ),
-                        )
-                      ],
+    return Scaffold(
+      body: SizedBox(
+        width: size.width,
+        height: size.height,
+        child: SingleChildScrollView(
+          child: Stack(
+            children: [
+              SizedBox(
+                height: 20,
+              ),
+              const Upside(
+                imgUrl: "assets/icons/login.png",
+              ),
+              const PageTitleBar(title: 'Login to your account'),
+              Padding(
+                padding: const EdgeInsets.only(top: 320.0),
+                child: Container(
+                  width: double.infinity,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(50),
+                      topRight: Radius.circular(50),
                     ),
                   ),
-                )
-              ],
-            ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      iconButton(context),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      const Text(
+                        "or use your email account",
+                        style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w600),
+                      ),
+                      Form(
+                        child: Column(
+                          children: [
+                            RoundedInputField(
+                              hintText: "Email",
+                              icon: Icons.email,
+                              controller: emailController,
+                            ),
+                            RoundedPasswordField(
+                              controller: passwordController,
+                            ),
+                            RoundedButton(
+                              text: 'LOGIN',
+                              press: () {
+                                validateAndSubmit(
+                                  emailController.text,
+                                  passwordController.text,
+                                  context,
+                                );
+                              },
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            const Text(
+                              'Forgot password?',
+                              style: TextStyle(
+                                  color: kPrimaryColor,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 13),
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            )
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              )
+            ],
           ),
         ),
       ),

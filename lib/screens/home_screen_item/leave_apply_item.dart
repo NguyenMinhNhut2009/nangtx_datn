@@ -3,40 +3,67 @@ import 'package:flutter/material.dart';
 
 class LeaveApplyItem extends StatelessWidget {
   final LeaveApplyModel data;
-  const LeaveApplyItem({super.key, required this.data});
+  final int index;
+  const LeaveApplyItem({super.key, required this.data, required this.index});
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: EdgeInsets.all(16.0),
-      elevation: 4.0, // Độ nâng của Card
-      child: ListTile(
-        contentPadding: EdgeInsets.only(
-            right: 16.0,
-            left: 16.0,
-            top: 10,
-            bottom: 10), // Padding của ListTile
-
-        title: Text(
-          data.classroom!.name ?? '',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 18.0,
+    return Container(
+      padding: EdgeInsets.only(top: 16, bottom: 16),
+      decoration: BoxDecoration(
+          color: Colors.transparent,
+          border:
+              Border(bottom: BorderSide(color: Color(0xffDCDCDC), width: 0.5))),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "${index}. ",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 18.0,
+            ),
           ),
-        ),
-        subtitle: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: 5,
-            ),
-            Text(data.lessonName ?? ''),
-            SizedBox(
-              height: 5,
-            ),
-            Text(data.reason ?? ''),
-          ],
-        ),
+          SizedBox(
+            width: 10,
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                data.classroom!.name!,
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18.0,
+                    color: Colors.blue),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Text(
+                'Lesson Name: ${data.lessonName ?? ''}',
+                style: TextStyle(fontSize: 16.0, color: Colors.black),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width - 70,
+                child: Text(
+                  "Reason: ${data.reason}",
+                  style: TextStyle(fontSize: 16.0, color: Colors.black),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
