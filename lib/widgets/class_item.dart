@@ -40,7 +40,8 @@ class ClassListItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    classInfo.name!,
+                    classInfo.name![0].toUpperCase() +
+                        classInfo.name!.substring(1),
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18.0,

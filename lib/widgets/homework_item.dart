@@ -40,8 +40,9 @@ class HomeworkListItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "${hwInfo.assignmentName} " +
-                        "${hwInfo.score != null ? "(${hwInfo.score} / 100)" : ""}",
+                    "${hwInfo.assignmentName![0].toUpperCase()}" +
+                        "${hwInfo.assignmentName!.substring(1)}" +
+                        " ${hwInfo.score != null ? "(${hwInfo.score} / 100)" : ""}",
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18.0,
@@ -84,35 +85,46 @@ class HomeworkListItem extends StatelessWidget {
             ? Positioned(
                 top: 10,
                 right: 0,
-                child: Icon(
-                  Icons.check_box,
-                  color: Colors.green,
+                child: Container(
+                  width: 15, // Điều chỉnh kích thước của checkbox
+                  height: 15,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.green,
+                  ),
+                  // child: Icon(
+                  //   Icons.check,
+                  //   size: 16, // Điều chỉnh kích thước của biểu tượng check
+                  //   color: Colors.white, // Màu của biểu tượng check
+                  // ),
+                ))
+            : SizedBox(),
+        hwInfo.isFinished == 0
+            ? Positioned.fill(
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => YourAssignemt(
+                                    id: hwInfo.id!,
+                                  )));
+                    },
+                    child: Ink(
+                      padding: EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color:
+                            Colors.blue.withOpacity(0.1), // Màu nền khi hover
+                      ),
+                      child: Icon(Icons.arrow_circle_right),
+                    ),
+                  ),
                 ),
               )
             : SizedBox(),
-        Positioned.fill(
-          child: Align(
-            alignment: Alignment.centerRight,
-            child: InkWell(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => YourAssignemt(
-                              id: hwInfo.id!,
-                            )));
-              },
-              child: Ink(
-                padding: EdgeInsets.all(5),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.blue.withOpacity(0.1), // Màu nền khi hover
-                ),
-                child: Icon(Icons.remove_red_eye_outlined),
-              ),
-            ),
-          ),
-        ),
       ],
     );
   }

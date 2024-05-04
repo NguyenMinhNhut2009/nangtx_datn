@@ -101,164 +101,152 @@ class _YourAssignemtState extends State<YourAssignemt> {
                 child: Container(
                   color: Colors.white,
                   margin: EdgeInsets.all(10),
-                  width: double.infinity,
-                  height: double.infinity,
-                  child: Container(
-                    color: Colors.white,
-                    child: Column(
-                      children: [
-                        Container(
+                  child: Column(
+                    children: [
+                      Container(
+                        color: Colors.white,
+                        margin: EdgeInsets.all(5),
+                        padding: EdgeInsets.all(5),
+                        child: Row(children: [
+                          Text(
+                            "Questions:",
+                            style: TextStyle(fontSize: 20),
+                          ),
+                          Spacer(),
+                          Text(
+                            "${index + 1} / ${asignment.length}",
+                            style: TextStyle(fontSize: 20),
+                          ),
+                        ]),
+                      ),
+                      Divider(
+                        color: Colors.grey.shade700,
+                      ),
+                      Expanded(
+                        child: Container(
                           color: Colors.white,
-                          margin: EdgeInsets.all(5),
-                          padding: EdgeInsets.all(5),
-                          child: Row(children: [
-                            Text(
-                              "Questions:",
-                              style: TextStyle(fontSize: 20),
+                          child: ListView(children: [
+                            SizedBox(
+                              height: 10,
                             ),
-                            Spacer(),
-                            Text(
-                              "${index + 1} / ${asignment.length}",
-                              style: TextStyle(fontSize: 20),
+                            Container(
+                              margin: EdgeInsets.all(5),
+                              padding: EdgeInsets.all(5),
+                              child: Text(
+                                asignment[index].question!,
+                                style: TextStyle(fontSize: 24),
+                                textAlign: TextAlign.center,
+                                overflow: TextOverflow.clip,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 50,
+                            ),
+                            Container(
+                              color: Colors.white,
+                              margin: EdgeInsets.all(5),
+                              padding: EdgeInsets.all(5),
+                              width: double.infinity,
+                              child: ElevatedButton(
+                                  onPressed: () => setState(() {
+                                        check(0);
+                                      }),
+                                  style: ButtonStyle(
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                            Colors.white),
+                                  ),
+                                  child: Text(
+                                    "A: ${asignment[index].option![0]}",
+                                    style: TextStyle(
+                                        fontSize: 20, color: Colors.black),
+                                    overflow: TextOverflow.clip,
+                                    textAlign: TextAlign.center,
+                                  )),
+                            ),
+                            Container(
+                              color: Colors.white,
+                              margin: EdgeInsets.all(5),
+                              padding: EdgeInsets.all(5),
+                              width: double.infinity,
+                              child: ElevatedButton(
+                                  onPressed: () => check(1),
+                                  style: ButtonStyle(
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                            Colors.white),
+                                  ),
+                                  child: Text(
+                                    "B: ${asignment[index].option![1]}",
+                                    style: TextStyle(
+                                        fontSize: 20, color: Colors.black),
+                                    overflow: TextOverflow.clip,
+                                    textAlign: TextAlign.center,
+                                  )),
+                            ),
+                            Container(
+                              color: Colors.white,
+                              margin: EdgeInsets.all(5),
+                              padding: EdgeInsets.all(5),
+                              width: double.infinity,
+                              child: ElevatedButton(
+                                  onPressed: () => check(2),
+                                  style: ButtonStyle(
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                            Colors.white),
+                                  ),
+                                  child: Text(
+                                    "C: ${asignment[index].option![2]}",
+                                    style: TextStyle(
+                                        fontSize: 20, color: Colors.black),
+                                    overflow: TextOverflow.clip,
+                                    textAlign: TextAlign.center,
+                                  )),
+                            ),
+                            Container(
+                              color: Colors.white,
+                              margin: EdgeInsets.all(5),
+                              padding: EdgeInsets.all(5),
+                              width: double.infinity,
+                              child: ElevatedButton(
+                                  onPressed: () => check(3),
+                                  style: ButtonStyle(
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                            Colors.white),
+                                  ),
+                                  child: Text(
+                                    "D: ${asignment[index].option![3]}",
+                                    style: TextStyle(
+                                        fontSize: 20, color: Colors.black),
+                                    overflow: TextOverflow.clip,
+                                    textAlign: TextAlign.center,
+                                  )),
                             ),
                           ]),
                         ),
-                        Divider(
-                          color: Colors.grey.shade700,
-                        ),
-                        Expanded(
-                          child: Container(
-                            color: Colors.white,
-                            margin: EdgeInsets.all(5),
-                            padding: EdgeInsets.all(5),
-                            width: double.infinity,
-                            height: double.infinity,
-                            child: Column(children: [
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Container(
-                                margin: EdgeInsets.all(5),
-                                padding: EdgeInsets.all(5),
-                                child: Text(
-                                  asignment[index].question!,
-                                  style: TextStyle(fontSize: 24),
-                                  textAlign: TextAlign.center,
-                                  overflow: TextOverflow.clip,
-                                ),
-                              ),
-                              SizedBox(
-                                height: 50,
-                              ),
-                              Container(
-                                color: Colors.white,
-                                margin: EdgeInsets.all(5),
-                                padding: EdgeInsets.all(5),
-                                width: double.infinity,
-                                child: ElevatedButton(
-                                    onPressed: () => setState(() {
-                                          check(0);
-                                        }),
-                                    style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.all<Color>(
-                                              Colors.white),
-                                    ),
-                                    child: Text(
-                                      "A: ${asignment[index].option![0]}",
-                                      style: TextStyle(
-                                          fontSize: 20, color: Colors.black),
-                                      overflow: TextOverflow.clip,
-                                      textAlign: TextAlign.center,
-                                    )),
-                              ),
-                              Container(
-                                color: Colors.white,
-                                margin: EdgeInsets.all(5),
-                                padding: EdgeInsets.all(5),
-                                width: double.infinity,
-                                child: ElevatedButton(
-                                    onPressed: () => check(1),
-                                    style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.all<Color>(
-                                              Colors.white),
-                                    ),
-                                    child: Text(
-                                      "B: ${asignment[index].option![1]}",
-                                      style: TextStyle(
-                                          fontSize: 20, color: Colors.black),
-                                      overflow: TextOverflow.clip,
-                                      textAlign: TextAlign.center,
-                                    )),
-                              ),
-                              Container(
-                                color: Colors.white,
-                                margin: EdgeInsets.all(5),
-                                padding: EdgeInsets.all(5),
-                                width: double.infinity,
-                                child: ElevatedButton(
-                                    onPressed: () => check(2),
-                                    style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.all<Color>(
-                                              Colors.white),
-                                    ),
-                                    child: Text(
-                                      "C: ${asignment[index].option![2]}",
-                                      style: TextStyle(
-                                          fontSize: 20, color: Colors.black),
-                                      overflow: TextOverflow.clip,
-                                      textAlign: TextAlign.center,
-                                    )),
-                              ),
-                              Container(
-                                color: Colors.white,
-                                margin: EdgeInsets.all(5),
-                                padding: EdgeInsets.all(5),
-                                width: double.infinity,
-                                child: ElevatedButton(
-                                    onPressed: () => check(3),
-                                    style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.all<Color>(
-                                              Colors.white),
-                                    ),
-                                    child: Text(
-                                      "D: ${asignment[index].option![3]}",
-                                      style: TextStyle(
-                                          fontSize: 20, color: Colors.black),
-                                      overflow: TextOverflow.clip,
-                                      textAlign: TextAlign.center,
-                                    )),
-                              ),
-                            ]),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            _showExitDialog(context);
-                          },
-                          child: Container(
-                            width: 100,
-                            height: 50,
-                            decoration: BoxDecoration(color: Colors.blue),
-                            child: Center(
-                              child: Text(
-                                "Submit",
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold),
-                              ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          _showExitDialog(context);
+                        },
+                        child: Container(
+                          width: 100,
+                          height: 50,
+                          decoration: BoxDecoration(color: Colors.blue),
+                          child: Center(
+                            child: Text(
+                              "Submit",
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
                             ),
                           ),
-                        )
-                      ],
-                    ),
+                        ),
+                      )
+                    ],
                   ),
                 ),
               ),

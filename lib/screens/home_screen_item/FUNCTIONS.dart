@@ -37,7 +37,7 @@ class _MainFunctionState extends State<MainFunction> {
                   MaterialPageRoute(builder: (context) => YourHomework()),
                 );
               },
-              title: "Home Work",
+              title: "Homework",
               icon: "assets/icons/house.png",
             ),
             // CustomIconButton(

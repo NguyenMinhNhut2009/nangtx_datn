@@ -33,7 +33,8 @@ class LeaveApplyItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                data.classroom!.name!,
+                data.classroom!.name![0].toUpperCase() +
+                    data.classroom!.name!.substring(1),
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18.0,
@@ -43,7 +44,7 @@ class LeaveApplyItem extends StatelessWidget {
                 height: 5,
               ),
               Text(
-                'Lesson Name: ${data.lessonName ?? ''}',
+                'Lesson Name: ${data.lessonName![0].toUpperCase() + data.lessonName!.substring(1) ?? ''}',
                 style: TextStyle(fontSize: 16.0, color: Colors.black),
               ),
               SizedBox(
@@ -52,7 +53,7 @@ class LeaveApplyItem extends StatelessWidget {
               Container(
                 width: MediaQuery.of(context).size.width - 70,
                 child: Text(
-                  "Reason: ${data.reason}",
+                  "Reason: ${data.reason![0].toUpperCase() + data.reason!.substring(1)}",
                   style: TextStyle(fontSize: 16.0, color: Colors.black),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,

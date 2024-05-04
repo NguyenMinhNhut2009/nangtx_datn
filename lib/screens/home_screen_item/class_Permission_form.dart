@@ -246,43 +246,51 @@ class _PermissionFormState extends State<PermissionForm> {
                 SizedBox(
                   height: 20,
                 ),
-                Text("Name of the lesson",
-                    style: TextStyle(fontSize: 16.0, color: Colors.black)),
-                SizedBox(
-                  height: 15,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    _showLessonsBottomSheet(context, inputClassList!);
-                  },
-                  child: Stack(
-                    alignment: AlignmentDirectional.centerEnd,
-                    children: [
-                      TextFormField(
-                        cursorColor: Colors.black,
-                        readOnly: true,
-                        enabled: false,
-                        decoration: InputDecoration(
-                            hintStyle: TextStyle(color: Colors.black),
-                            hintText: nameOfInstructorVC.text,
-                            border: OutlineInputBorder()),
+                inputClassList == null
+                    ? SizedBox()
+                    : Text("Name of the lesson",
+                        style: TextStyle(fontSize: 16.0, color: Colors.black)),
+                inputClassList == null
+                    ? SizedBox()
+                    : SizedBox(
+                        height: 15,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment
-                            .spaceBetween, // Căn các phần tử vào giữa
-                        crossAxisAlignment:
-                            CrossAxisAlignment.center, // Căn theo trục chính
-                        children: [
-                          Spacer(), // Dùng Spacer để đẩy Icon về phía bên phải
-                          Icon(Icons.arrow_drop_down),
-                        ],
+                inputClassList == null
+                    ? SizedBox()
+                    : GestureDetector(
+                        onTap: () {
+                          _showLessonsBottomSheet(context, inputClassList!);
+                        },
+                        child: Stack(
+                          alignment: AlignmentDirectional.centerEnd,
+                          children: [
+                            TextFormField(
+                              cursorColor: Colors.black,
+                              readOnly: true,
+                              enabled: false,
+                              decoration: InputDecoration(
+                                  hintStyle: TextStyle(color: Colors.black),
+                                  hintText: nameOfInstructorVC.text,
+                                  border: OutlineInputBorder()),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment
+                                  .spaceBetween, // Căn các phần tử vào giữa
+                              crossAxisAlignment: CrossAxisAlignment
+                                  .center, // Căn theo trục chính
+                              children: [
+                                Spacer(), // Dùng Spacer để đẩy Icon về phía bên phải
+                                Icon(Icons.arrow_drop_down),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
+                inputClassList == null
+                    ? SizedBox()
+                    : SizedBox(
+                        height: 20,
+                      ),
                 Text("Reason please think"),
                 SizedBox(
                   height: 15,

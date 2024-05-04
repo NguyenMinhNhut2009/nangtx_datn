@@ -26,13 +26,14 @@ class _YourHomeworkState extends State<YourHomework> {
       observer: this,
       onNotification: (options) {
         loadData();
-        print(2);
+        print("1234567890");
       },
     );
   }
 
   loadData() async {
     homework = await getListHomeWork();
+    print(homework);
     setState(() {});
   }
 

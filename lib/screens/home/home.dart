@@ -25,10 +25,10 @@ class _HomePageState extends State<HomePage> {
   }
 
   loadData() async {
-    // if (globals.accessToken != "") {
-    user = await getUserInfor();
-    setState(() {});
-    // }
+    if (globals.accessToken != "") {
+      user = await getUserInfor();
+      setState(() {});
+    }
   }
 
   @override

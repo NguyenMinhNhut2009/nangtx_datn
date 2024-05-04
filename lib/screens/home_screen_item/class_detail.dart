@@ -84,7 +84,8 @@ class _ClassDetailPageState extends State<ClassDetailPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              lessons[index].lessonName!,
+                              lessons[index].lessonName![0].toUpperCase() +
+                                  lessons[index].lessonName!.substring(1),
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 18.0,
@@ -154,7 +155,7 @@ class _ClassDetailPageState extends State<ClassDetailPage> {
                                                 builder: (context) =>
                                                     PdfViewController(
                                                       url:
-                                                          'https://cdn.syncfusion.com/content/PDFViewer/flutter-succinctly.pdf',
+                                                          '${lessons[index].documents![0].linkUrl}',
                                                       title:
                                                           '${lessons[index].documents![0].name ?? "Document"} ',
                                                     )),
