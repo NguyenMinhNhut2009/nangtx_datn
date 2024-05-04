@@ -229,37 +229,42 @@ class _YourAssignemtState extends State<YourAssignemt> {
       barrierDismissible:
           false, // Không cho phép người dùng đóng cửa sổ bằng cách nhấn bên ngoài
       builder: (BuildContext context) {
-        return AlertDialog(
-          backgroundColor: Colors.white,
-          title: Text('Submit confirmation'),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Text('Are you sure you want to submit your assignment?'),
-              ],
-            ),
+        return Theme(
+          data: Theme.of(context).copyWith(
+            dialogBackgroundColor: Colors.white, // Đặt màu nền là màu trắng
           ),
-          actions: <Widget>[
-            TextButton(
-              child: Text('No'),
-              onPressed: () {
-                // Đóng cửa sổ thoát
-                Navigator.of(context).pop();
-              },
+          child: AlertDialog(
+            backgroundColor: Colors.white,
+            title: Text('Submit confirmation'),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  Text('Are you sure you want to submit your assignment?'),
+                ],
+              ),
             ),
-            TextButton(
-              child: Text('Yes'),
-              onPressed: () {
-                postHomeWorkResultStore(
-                    globals.userId.toString(),
-                    widget.id.toString(),
-                    score.toString(),
-                    asignment.length.toString());
-                Navigator.of(context).pop();
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
+            actions: <Widget>[
+              TextButton(
+                child: Text('No'),
+                onPressed: () {
+                  // Đóng cửa sổ thoát
+                  Navigator.of(context).pop();
+                },
+              ),
+              TextButton(
+                child: Text('Yes'),
+                onPressed: () {
+                  postHomeWorkResultStore(
+                      globals.userId.toString(),
+                      widget.id.toString(),
+                      score.toString(),
+                      asignment.length.toString());
+                  Navigator.of(context).pop();
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          ),
         );
       },
     );
